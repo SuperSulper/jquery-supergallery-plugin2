@@ -30,10 +30,10 @@ ul,li{
 	list-style:none;
 	display: block;
 }
-#gallery{
+.gallery{
 	width: @thumbWidth * @imageNum / 2;
 
-	#main{
+	.main{
 		width: @mainWidth;
 		height: @mainHeight;
 		margin-left: @thumbWidth;
@@ -52,7 +52,7 @@ ul,li{
 			}
 		}
 	}
-	#thumb{
+	.thumb{
 		width: @thumbWidth * @imageNum / 2;
 		height: @thumbHeight * 2;
 		li{
@@ -92,11 +92,11 @@ ul,li{
 
 			.btn(0.5,1);
 
-			&#nextBtn{
+			&.nextBtn{
 				float: right;
 				border-radius: 0 @btnHeight/2 @btnHeight/2 0;
 			}
-			&#prevBtn{
+			&.prevBtn{
 				float: left;
 				border-radius: @btnHeight/2 0 0 @btnHeight/2;
 			}

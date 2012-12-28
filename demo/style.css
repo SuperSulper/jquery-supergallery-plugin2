@@ -162,43 +162,43 @@ li {
   list-style: none;
   display: block;
 }
-#gallery {
+.gallery {
   width: 500px;
 }
-#gallery #main {
+.gallery .main {
   width: 300px;
   height: 300px;
   margin-left: 100px;
 }
-#gallery #main li {
+.gallery .main li {
   width: 300px;
   height: 300px;
   display: none;
 }
-#gallery #main li img {
+.gallery .main li img {
   width: 300px;
   height: auto;
 }
-#gallery #main li:first-child {
+.gallery .main li:first-child {
   display: block;
 }
-#gallery #thumb {
+.gallery .thumb {
   width: 500px;
   height: 200px;
 }
-#gallery #thumb li {
+.gallery .thumb li {
   width: 100px;
   height: 100px;
   display: block;
   float: left;
   cursor: pointer;
 }
-#gallery #thumb li.selected img {
+.gallery .thumb li.selected img {
   width: 96px;
   height: 96px;
   border: 2px solid #C00;
 }
-#gallery #thumb li img {
+.gallery .thumb li img {
   cursor: pointer;
   opacity: 1;
   filter: alpha(opacity=100);
@@ -209,17 +209,17 @@ li {
   -o-transition: opacity 0.2s ease-in-out;
   transition: opacity 0.2s ease-in-out;
 }
-#gallery #thumb li img:hover {
+.gallery .thumb li img:hover {
   opacity: 0.5;
   filter: alpha(opacity=100);
   -ms-filter: "alpha(opacity=50)";
 }
-#gallery nav {
+.gallery nav {
   width: 500px;
   height: 50px;
   margin-top: -50px;
 }
-#gallery nav div {
+.gallery nav div {
   width: 100px;
   height: 50px;
   line-height: 50px;
@@ -237,16 +237,16 @@ li {
   -o-transition: opacity 0.2s ease-in-out;
   transition: opacity 0.2s ease-in-out;
 }
-#gallery nav div:hover {
+.gallery nav div:hover {
   opacity: 0.5;
   filter: alpha(opacity=100);
   -ms-filter: "alpha(opacity=50)";
 }
-#gallery nav div#nextBtn {
+.gallery nav div.nextBtn {
   float: right;
   border-radius: 0 25px 25px 0;
 }
-#gallery nav div#prevBtn {
+.gallery nav div.prevBtn {
   float: left;
   border-radius: 25px 0 0 25px;
 }
