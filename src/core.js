@@ -3,10 +3,10 @@ var Supergallery = function(target,_o){
 	_o = _o || {};
 	this.o = {
 		selectors:{
-			main:'#main',
-			thumb:'#thumb',
-			nextBtn:'#nextBtn',
-			prevBtn:'#prevBtn'
+			main:'.main',
+			thumb:'.thumb',
+			nextBtn:'.nextBtn',
+			prevBtn:'.prevBtn'
 		},
 		animation:{
 			type:'fade',
@@ -208,6 +208,9 @@ var core = function(targetSelector,_o){
 	return new Supergallery(targetSelector,_o);
 };
 var fn = function(_o){
-	new Supergallery(this,_o);
+	$(this)
+		.each(function(){
+			new Supergallery(this,_o);
+		});
 	return this;
 };
