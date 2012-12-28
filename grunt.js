@@ -52,5 +52,5 @@ module.exports = function(grunt){
 			}
 		}
 	});
-	grunt.registerTask('default', 'concat less');
+	grunt.registerTask('default', 'concat min');
 };
