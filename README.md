@@ -9,9 +9,9 @@ facebook : facebook.com/megazalrock
 ## 更新履歴
 * 1.0.0	InitialRelease
 
-
 ## 概要
-Web製作者向けのギャラリープラグインです。
+Web製作者向けのギャラリープラグインです。  
+[デモ](http://mgzl.jp/jsg-demo/)
 
 ## 必要なライブラリ
 [jQuery 1.8+](http://jquery.com/)
@@ -21,6 +21,7 @@ Chrome23+(Win/Mac)
 Firefox16+(Win/Mac)  
 Opera12+(Win/Mac)  
 Safari6+(Mac)
+
 
 ## 含まれているファイル
 *	jquery-supergallery-plugin2.js
