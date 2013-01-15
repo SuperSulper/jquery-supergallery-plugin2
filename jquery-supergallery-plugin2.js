@@ -72,7 +72,7 @@ Supergallery.prototype.init = function(){
 			.css({display:'none'});
 
 	sg.changeTo(sg.o.other.initialSelect,true);
-	if(sg.$thumbChildren.length){	
+	if(sg.$thumbChildren.length){
 		sg.$thumbChildren
 			.each(function(n){
 				$(this)

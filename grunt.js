@@ -37,12 +37,22 @@ module.exports = function(grunt){
 			dist : {
 				files : jsFiles,
 				tasks:'concat min'
+			},
+			less : {
+				files : ['demo/style.less'],
+				tasks : 'less'
 			}
 		},
 		concat:  {
 			dist : {
 				src : jsFiles,
 				dest : 'jquery-supergallery-plugin2.js'
+			}
+		},
+		less :{
+			dist:{
+				src:['demo/style.less'],
+				dest: 'demo/style.css'
 			}
 		},
 		min: {
@@ -52,5 +62,5 @@ module.exports = function(grunt){
 			}
 		}
 	});
-	grunt.registerTask('default', 'concat min');
+	grunt.registerTask('default', 'concat min less');
 };

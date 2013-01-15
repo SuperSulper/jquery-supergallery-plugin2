@@ -9,13 +9,65 @@
 <script type="text/javascript" src="../jquery-supergallery-plugin2.min.js"></script>
 <script type="text/javascript">
 	$(function(){
+		//#gallery
 		$('#gallery')
 			.supergallery()
 			.on('pageChangeStart',function(e,num){
-					console.log(e.type,num);
+				//console.log(e.type,num);
 				})
 			.on('pageChangeEnd',function(e,num){
-				console.log(e.type,num);
+				//console.log(e.type,num);
+			});
+
+		//#gallery2
+		var gallery2Thumb = $.supergallery('#gallery2thumb',{
+			selectors:{
+				main:'ul.thumbPages',
+				thumb:'',
+				nextBtn:'',
+				prevBtn:''
+			},
+			animation:{
+				type:'slide'
+			},
+			timer:{
+				enable:false
+			}
+		});
+
+		var gallery2Main = $.supergallery('#gallery2Main',{
+			selectors:{
+				main:'ul.main',
+				thumb:''
+			},
+			animation:{
+				type:'slide'
+			},
+			timer:{
+				enable:true
+			}
+		})
+		$('#gallery2Main')
+			.on('pageChangeStart',function(e,num){
+				gallery2Thumb.changeTo(Math.floor(num / 5));
+				$('#gallery2thumb > ul.thumbPages > li > ul > li')
+					.eq(num)
+						.addClass('selected')
+					.end()
+					.not(':eq('+ num +')')
+						.removeClass('selected');
+			});
+		$('#gallery2thumb > ul.thumbPages > li > ul > li')
+			.each(function(n){
+				$(this).click(function(){
+					gallery2Main.changeTo(n);
+				});
+			});
+		$('#gallery2thumb > ul.thumbPages')
+			.hover(function(){
+				gallery2Main.clearTimer();
+			},function(){
+				gallery2Main.setTimer();
 			});
 			
 	});
@@ -52,6 +104,48 @@
 			<li><img src="http://lorempixel.com/g/100/100/city/9/" alt=""></li>
 			<li><img src="http://lorempixel.com/g/100/100/city/10/" alt=""></li>
 		</ul>
+	</div>
+	<div id="gallery2" class="gallery">
+		<div id="gallery2Main">
+			<ul class="main">
+				<li><img src="http://lorempixel.com/g/300/300/city/1/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/2/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/3/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/4/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/5/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/6/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/7/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/8/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/9/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/10/" alt=""></li>
+			</ul>
+			<nav>
+				<div class="prevBtn">PREV</div>
+				<div class="nextBtn">NEXT</div>
+			</nav>
+		</div>
+		<div id="gallery2thumb">
+			<ul class="thumbPages">
+				<li>
+					<ul class="thumb">
+						<li><img src="http://lorempixel.com/g/100/100/city/1/" alt=""></li>
+						<li><img src="http://lorempixel.com/g/100/100/city/2/" alt=""></li>
+						<li><img src="http://lorempixel.com/g/100/100/city/3/" alt=""></li>
+						<li><img src="http://lorempixel.com/g/100/100/city/4/" alt=""></li>
+						<li><img src="http://lorempixel.com/g/100/100/city/5/" alt=""></li>
+					</ul>
+				</li>
+				<li>
+					<ul class="thumb">
+						<li><img src="http://lorempixel.com/g/100/100/city/6/" alt=""></li>
+						<li><img src="http://lorempixel.com/g/100/100/city/7/" alt=""></li>
+						<li><img src="http://lorempixel.com/g/100/100/city/8/" alt=""></li>
+						<li><img src="http://lorempixel.com/g/100/100/city/9/" alt=""></li>
+						<li><img src="http://lorempixel.com/g/100/100/city/10/" alt=""></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
 	</div>
 </body>
 </html>

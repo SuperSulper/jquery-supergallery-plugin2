@@ -104,3 +104,18 @@ ul,li{
 	}
 }
 
+#gallery2{
+	.thumbPages{
+		width: @thumbWidth * @imageNum / 2;
+		height: @thumbHeight;
+		& > li{
+			width: @thumbWidth * @imageNum / 2;
+			height: @thumbHeight;
+			display: none;
+			&:first-child{
+				display: block;
+			}
+		}
+	}
+}
+

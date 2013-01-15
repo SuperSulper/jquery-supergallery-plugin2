@@ -250,3 +250,15 @@ li {
   float: left;
   border-radius: 25px 0 0 25px;
 }
+#gallery2 .thumbPages {
+  width: 500px;
+  height: 100px;
+}
+#gallery2 .thumbPages > li {
+  width: 500px;
+  height: 100px;
+  display: none;
+}
+#gallery2 .thumbPages > li:first-child {
+  display: block;
+}
