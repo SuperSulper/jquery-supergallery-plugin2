@@ -214,6 +214,74 @@ Supergallery.prototype.clearTimer = function(){
 var core = {
 	supergallery:function(targetSelector,_o){
 		return new Supergallery(targetSelector,_o);
+	},
+	superThumbGallery:function(targetSelector,_o){
+		_o = _o || {};
+		var o = {
+			selectors:{
+				main:'.mainHolder',
+				thumbPages:'.thumbHolder',
+				thumbBtns:'.thumbBtn'
+			},
+			main:{
+				selectors:{
+					thumb:''
+				},
+				timer:{
+					enable:true
+				}
+			},
+			thumb:{
+				selectors:{
+					main:'.thumbPages',
+					thumb:'',
+					nextBtn:'',
+					prevBtn:''
+				},
+				animation:{
+					type:'slide'
+				},
+				timer:{
+					enable:false
+				}
+			}
+		};
+		$.extend(true,o,_o);
+		var mainSelector = [targetSelector,o.selectors.main].join(' ');
+		var thumbPagesSlector = [targetSelector,o.selectors.thumbPages].join(' ');
+
+		var main = $.supergallery(mainSelector,o.main);
+		var thumbPages = $.supergallery(thumbPagesSlector,o.thumb);
+		var $_thumbBtns = $([targetSelector,o.selectors.thumbPages,o.thumb.selectors.main,o.selectors.thumbBtns].join(' '));
+
+		$(mainSelector)
+			.on('pageChangeStart',function(e,num){
+				thumbPages.changeTo(Math.floor(num / 5));
+				$_thumbBtns
+					.eq(num)
+						.addClass('selected')
+					.end()
+					.not(':eq('+ num +')')
+						.removeClass('selected');
+			});
+
+		$(targetSelector)
+			.hover(function(){
+				main.clearTimer();
+			},function(){
+				main.setTimer();
+			});
+
+		$_thumbBtns
+			.each(function(n){
+				$(this).click(function(){
+					main.changeTo(n);
+				});
+			});
+		return {
+			main:main,
+			thumbPages:thumbPages
+		};
 	}
 };
 
