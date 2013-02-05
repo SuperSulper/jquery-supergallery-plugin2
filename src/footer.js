@@ -1,3 +1,3 @@
-$.extend({supergallery:core});
-$.fn.extend({supergallery:fn});
+$.extend(core);
+$.fn.extend(fn);
 })(jQuery);

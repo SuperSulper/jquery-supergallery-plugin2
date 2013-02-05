@@ -1,4 +1,4 @@
-
+/*global $:true, jQuery:true */
 var Supergallery = function(target,_o){
 	_o = _o || {};
 	this.o = {
@@ -204,13 +204,19 @@ Supergallery.prototype.setTimer = function(){
 Supergallery.prototype.clearTimer = function(){
 	clearInterval(this.timerId);
 };
-var core = function(targetSelector,_o){
-	return new Supergallery(targetSelector,_o);
+
+var core = {
+	supergallery:function(targetSelector,_o){
+		return new Supergallery(targetSelector,_o);
+	}
 };
-var fn = function(_o){
-	$(this)
-		.each(function(){
-			new Supergallery(this,_o);
-		});
-	return this;
+
+var fn = {
+	supergallery:function(_o){
+		$(this)
+			.each(function(){
+				new Supergallery(this,_o);
+			});
+		return this;
+	}
 };
