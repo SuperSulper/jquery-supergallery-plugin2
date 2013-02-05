@@ -217,6 +217,7 @@ var core = {
 				thumbPages:'.thumbHolder',
 				thumbBtns:'.thumbBtn'
 			},
+			thumbNum:5,
 			main:{
 				selectors:{
 					thumb:''
@@ -250,7 +251,7 @@ var core = {
 
 		$(mainSelector)
 			.on('pageChangeStart',function(e,num){
-				thumbPages.changeTo(Math.floor(num / 5));
+				thumbPages.changeTo(Math.floor(num / o.thumbNum));
 				$_thumbBtns
 					.eq(num)
 						.addClass('selected')

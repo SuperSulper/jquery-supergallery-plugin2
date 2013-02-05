@@ -1,5 +1,5 @@
 # jQuery Supergallery Plugin2
-Version 1.0.0
+Version 1.1.0
 
 Otto Kamiya (MegazalRock)  
 mail : otto@mgzl.jp  
@@ -7,6 +7,7 @@ twitter : @megazal_rock
 facebook : facebook.com/megazalrock
 
 ## 更新履歴
+* 1.1.0 ページ切り替え付きサムネイルのためのヘルパーを追加	
 * 1.0.0	InitialRelease
 
 ## 概要
@@ -23,7 +24,7 @@ Opera12+(Win/Mac)
 Safari6+(Mac)
 
 
-## 含まれているファイル
+## 使用するファイル
 *	jquery-supergallery-plugin2.js
 *	jquery-supergallery-plugin2.min.js
 
@@ -36,6 +37,7 @@ minがついているファイルはminify済みのファイルです。通常�
 *	[その他の使用方法](#sub)
 	1. [外部からの操作](#sub_1)
 	2. [イベント](#sub_2)
+	3. [ページ切り替え付きサムネイルのヘルパー関数](#sub_3)
 
 ### <a name="main"></a>主な使用方法
 
@@ -120,7 +122,7 @@ Javascriptの記述例（全てデフォルトの設定で動作させる場合�
 	gallery.setTimer();		//現在の自動めくり用タイマーを破棄して、新たにタイマーを設定します。
 	gallery.clearTimer();	//現在の自動めくり用タイマーを破棄します。
 
-#### イベント
+#### <a name="sub_2"></a>イベント
 対象の要素にて、`pageChangeStart` `pageChangeEnd`イベントが発生します。`pageChangeStart`はアニメーション開始時に、`pageChangeEnd`はアニメーション終了時に発生します。	
 
 	$('#gallery')
@@ -133,6 +135,91 @@ Javascriptの記述例（全てデフォルトの設定で動作させる場合�
 			//e : jQueryイベントオブジェクト
 			//pageNum : ページ番号
 		})
+
+#### <a name="sub_3"></a>ページ切り替え付きサムネイルのヘルパー関数
+このプラグインをうまく使うことによって、ページ切り替えのついたサムネイルにすることも可能ですが、面倒なのでヘルパー関数を追加しました。
+
+HTMLの記述例
+
+	<div id="gallery2" class="gallery">
+		<div class="mainHolder">
+			<ul class="main">
+				<li><img src="http://lorempixel.com/g/300/300/city/1/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/2/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/3/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/4/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/5/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/6/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/7/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/8/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/9/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/10/" alt=""></li>
+			</ul>
+			<nav>
+				<div class="prevBtn">PREV</div>
+				<div class="nextBtn">NEXT</div>
+			</nav>
+		</div>
+		<div class="thumbHolder">
+			<ul class="thumbPages">
+				<li>
+					<ul class="thumb">
+						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/1/" alt=""></li>
+						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/2/" alt=""></li>
+						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/3/" alt=""></li>
+						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/4/" alt=""></li>
+						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/5/" alt=""></li>
+					</ul>
+				</li>
+				<li>
+					<ul class="thumb">
+						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/6/" alt=""></li>
+						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/7/" alt=""></li>
+						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/8/" alt=""></li>
+						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/9/" alt=""></li>
+						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/10/" alt=""></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+JavaScriptの記述例
+
+	$.superThumbGallery('#gallery2');
+
+オプションの形式とデフォルトは下記のとおりです。
+
+	{
+		selectors:{
+			main:'.mainHolder',// メイン画像全体のセレクタ
+			thumbPages:'.thumbHolder', // サムネイルのページ全体のセレクタ
+			thumbBtns:'.thumbBtn' // サムネイル自体のセレクタ
+		},
+		thumbNum:5, //サムネイルの1ページあたりの個数
+		main:{
+			selectors:{
+				thumb:'' //必ず空にします。
+			},
+			timer:{
+				enable:true
+			}
+		},
+		thumb:{
+			selectors:{
+				main:'.thumbPages', //サムネイルのページ用のセレクタ
+				thumb:'', //必ず空にします。
+				nextBtn:'', //必ず空にします。
+				prevBtn:'' //必ず空にします。
+			},
+			animation:{
+				type:'slide'
+			},
+			timer:{
+				enable:false //必ずfalseにします。
+			}
+		}
+	};
 
 
 ## ライセンス

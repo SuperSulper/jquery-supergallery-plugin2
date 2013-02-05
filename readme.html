@@ -1,180 +1,421 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><style>html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+<!DOCTYPE html><html><head><meta charset="UTF-8"><style>html {
+    margin: 0;
+    padding: 0; }
 
-body{
-  color:#444;
-  font-family:Georgia, Palatino, 'Palatino Linotype', Times,
-              'Times New Roman', serif,
-              "Hiragino Sans GB", "STXihei", "微软雅黑";
-  font-size:12px;
-  line-height:1.5em;
-  background:#fefefe;
-  width: 45em;
-  margin: 10px auto;
-  padding: 1em;
-  outline: 1300px solid #FAFAFA;
-}
+body {
+    background-color: white;
+    border-radius: 3px;
+    border: 3px solid #EEE;
+    box-shadow: inset 0 0 0 1px #CECECE;
+    font-family: Helvetica,arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    width: 975px;
+    padding: 30px;
+    margin: 2em auto; }
 
-a{ color: #0645ad; text-decoration:none;}
-a:visited{ color: #0b0080; }
-a:hover{ color: #06e; }
-a:active{ color:#faa700; }
-a:focus{ outline: thin dotted; }
-a:hover, a:active{ outline: 0; }
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
 
-span.backtick {
-  border:1px solid #EAEAEA;
-  border-radius:3px;
-  background:#F8F8F8;
-  padding:0 3px 0 3px;
-}
+a {
+  color: #4183C4;
+  text-decoration: none; }
+a:hover {
+  text-decoration: underline; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
 
-::-moz-selection{background:rgba(255,255,0,0.3);color:#000}
-::selection{background:rgba(255,255,0,0.3);color:#000}
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
 
-a::-moz-selection{background:rgba(255,255,0,0.3);color:#0645ad}
-a::selection{background:rgba(255,255,0,0.3);color:#0645ad}
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url("../../images/modules/styleguide/para.png") no-repeat 10px center;
+  text-decoration: none; }
 
-p{
-margin:1em 0;
-}
+h1 tt, h1 code {
+  font-size: inherit; }
 
-img{
-max-width:100%;
-}
+h2 tt, h2 code {
+  font-size: inherit; }
 
-h1,h2,h3,h4,h5,h6{
-font-weight:normal;
-color:#111;
-line-height:1em;
-}
-h4,h5,h6{ font-weight: bold; }
-h1{ font-size:2.5em; }
-h2{ font-size:2em; border-bottom:1px solid silver; padding-bottom: 5px; }
-h3{ font-size:1.5em; }
-h4{ font-size:1.2em; }
-h5{ font-size:1em; }
-h6{ font-size:0.9em; }
+h3 tt, h3 code {
+  font-size: inherit; }
 
-blockquote{
-color:#666666;
-margin:0;
-padding-left: 3em;
-border-left: 0.5em #EEE solid;
-}
-hr { display: block; height: 2px; border: 0; border-top: 1px solid #aaa;border-bottom: 1px solid #eee; margin: 1em 0; padding: 0; }
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url("https://a248.e.akamai.net/assets.github.com/assets/primer/markdown/dirty-shade-0e7d81b119cc9beae17b0c98093d121fa0050a74.png") repeat-x 0 0;
+  border: 0 none;
+  color: #ccc;
+  height: 4px;
+  padding: 0; }
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+ul :last-child, ol :last-child {
+  margin-bottom: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  border-collapse: collapse; border-spacing: 0; padding: 0; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      text-align: left;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      text-align: left;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
 
 
-pre , code, kbd, samp { 
-  color: #000; 
-  font-family: monospace; 
-  font-size: 0.88em; 
-  border-radius:3px;
-  background-color: #F8F8F8;
-  border: 1px solid #CCC; 
-}
-pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; padding: 5px;}
-pre code { border: 0px !important; }
-code { padding: 0 3px 0 3px; }
+.markdown-body code,.markdown-body tt{margin:0 2px;padding:0px 5px;white-space:nowrap;border:1px solid #eaeaea;background-color:#f8f8f8;border-radius:3px}
+.markdown-body pre>code{margin:0;padding:0;white-space:pre;border:none;background:transparent}
+.markdown-body .highlight pre,.markdown-body pre{background-color:#f8f8f8;border:1px solid #ccc;font-size:13px;line-height:19px;overflow:auto;padding:6px 10px;border-radius:3px}
+.markdown-body pre code,.markdown-body pre tt{background-color:transparent;border:none}
+.highlight{background:#ffffff}
+.highlight .c{color:#999988;font-style:italic}
+.highlight .err{color:#a61717;background-color:#e3d2d2}
+.highlight .k{font-weight:bold}
+.highlight .o{font-weight:bold}
+.highlight .cm{color:#999988;font-style:italic}
+.highlight .cp{color:#999999;font-weight:bold}
+.highlight .c1{color:#999988;font-style:italic}
+.highlight .cs{color:#999999;font-weight:bold;font-style:italic}
+.highlight .gd{color:#000000;background-color:#ffdddd}
+.highlight .gd .x{color:#000000;background-color:#ffaaaa}
+.highlight .ge{font-style:italic}
+.highlight .gr{color:#aa0000}
+.highlight .gh{color:#999999}
+.highlight .gi{color:#000000;background-color:#ddffdd}
+.highlight .gi .x{color:#000000;background-color:#aaffaa}
+.highlight .go{color:#888888}
+.highlight .gp{color:#555555}
+.highlight .gs{font-weight:bold}
+.highlight .gu{color:#800080;font-weight:bold}
+.highlight .gt{color:#aa0000}
+.highlight .kc{font-weight:bold}
+.highlight .kd{font-weight:bold}
+.highlight .kn{font-weight:bold}
+.highlight .kp{font-weight:bold}
+.highlight .kr{font-weight:bold}
+.highlight .kt{color:#445588;font-weight:bold}
+.highlight .m{color:#009999}
+.highlight .s{color:#d14}
+.highlight .na{color:#008080}
+.highlight .nb{color:#0086B3}
+.highlight .nc{color:#445588;font-weight:bold}
+.highlight .no{color:#008080}
+.highlight .ni{color:#800080}
+.highlight .ne{color:#990000;font-weight:bold}
+.highlight .nf{color:#990000;font-weight:bold}
+.highlight .nn{color:#555555}
+.highlight .nt{color:#000080}
+.highlight .nv{color:#008080}
+.highlight .ow{font-weight:bold}
+.highlight .w{color:#bbbbbb}
+.highlight .mf{color:#009999}
+.highlight .mh{color:#009999}
+.highlight .mi{color:#009999}
+.highlight .mo{color:#009999}
+.highlight .sb{color:#d14}
+.highlight .sc{color:#d14}
+.highlight .sd{color:#d14}
+.highlight .s2{color:#d14}
+.highlight .se{color:#d14}
+.highlight .sh{color:#d14}
+.highlight .si{color:#d14}
+.highlight .sx{color:#d14}
+.highlight .sr{color:#009926}
+.highlight .s1{color:#d14}
+.highlight .ss{color:#990073}
+.highlight .bp{color:#999999}
+.highlight .vc{color:#008080}
+.highlight .vg{color:#008080}
+.highlight .vi{color:#008080}
+.highlight .il{color:#009999}
+.highlight .gc{color:#999;background-color:#EAF2F5}
+.type-csharp .highlight .k{color:#0000FF}
+.type-csharp .highlight .kt{color:#0000FF}
+.type-csharp .highlight .nf{color:#000000;font-weight:normal}
+.type-csharp .highlight .nc{color:#2B91AF}
+.type-csharp .highlight .nn{color:#000000}
+.type-csharp .highlight .s{color:#A31515}
+.type-csharp .highlight .sc{color:#A31515}
 
-b, strong { font-weight: bold; }
 
-dfn { font-style: italic; }
+</style></head><body><h1>jQuery Supergallery Plugin2</h1>
 
-ins { background: #ff9; color: #000; text-decoration: none; }
+<p>Version 1.1.0</p>
 
-mark { background: #ff0; color: #000; font-style: italic; font-weight: bold; }
-
-sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
-sup { top: -0.5em; }
-sub { bottom: -0.25em; }
-
-ul, ol { margin: 1em 0; padding: 0 0 0 2em; }
-li p:last-child { margin:0 }
-dd { margin: 0 0 0 2em; }
-
-img { border: 0; -ms-interpolation-mode: bicubic; vertical-align: middle; }
-
-table { border-collapse: collapse; border-spacing: 0; }
-td { vertical-align: top; }
-
-@media only screen and (min-width: 480px) {
-body{font-size:14px;}
-}
-
-@media only screen and (min-width: 768px) {
-body{font-size:16px;}
-}
-
-@media print {
-  * { background: transparent !important; color: black !important; filter:none !important; -ms-filter: none !important; }
-  body{font-size:12pt; max-width:100%;}
-  a, a:visited { text-decoration: underline; }
-  hr { height: 1px; border:0; border-bottom:1px solid black; }
-  a[href]:after { content: " (" attr(href) ")"; }
-  abbr[title]:after { content: " (" attr(title) ")"; }
-  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }
-  pre, blockquote { border: 1px solid #999; padding-right: 1em; page-break-inside: avoid; }
-  tr, img { page-break-inside: avoid; }
-  img { max-width: 100% !important; }
-  @page :left { margin: 15mm 20mm 15mm 10mm; }
-  @page :right { margin: 15mm 10mm 15mm 20mm; }
-  p, h2, h3 { orphans: 3; widows: 3; }
-  h2, h3 { page-break-after: avoid; }
-}</style></head><body><h1 id="jquery-supergallery-plugin2">jQuery Supergallery Plugin2</h1>
-
-<p>Version 1.0.0</p>
-
-<p>Otto Kamiya (MegazalRock) <br />
-mail : otto@mgzl.jp <br />
-twitter : @megazal_rock <br />
+<p>Otto Kamiya (MegazalRock)<br><br>
+mail : <a href="mailto:otto@mgzl.jp">otto@mgzl.jp</a><br><br>
+twitter : @megazal_rock<br><br>
 facebook : facebook.com/megazalrock</p>
 
 <h2>更新履歴</h2>
 
 <ul>
+<li>1.1.0 ページ切り替え付きサムネイルのためのヘルパーを追加 </li>
 <li>1.0.0 InitialRelease</li>
-</ul>
+</ul><h2>概要</h2>
 
-<h2 id="-2">概要</h2>
+<p>Web製作者向けのギャラリープラグインです。<br><br><a href="http://mgzl.jp/jsg-demo/">デモ</a></p>
 
-<p>Web製作者向けのギャラリープラグインです。 <br />
-<a href="http://mgzl.jp/jsg-demo/">デモ</a></p>
-
-<h2 id="-3">必要なライブラリ</h2>
+<h2>必要なライブラリ</h2>
 
 <p><a href="http://jquery.com/">jQuery 1.8+</a></p>
 
-<h2 id="-4">動作環境</h2>
+<h2>動作環境</h2>
 
-<p>Internet Explorer 7-10(Win) <br />
-Chrome23+(Win/Mac) <br />
-Firefox16+(Win/Mac) <br />
-Opera12+(Win/Mac) <br />
+<p>Internet Explorer 7-10(Win)<br><br>
+Chrome23+(Win/Mac)<br><br>
+Firefox16+(Win/Mac)<br><br>
+Opera12+(Win/Mac)<br><br>
 Safari6+(Mac)</p>
 
-<h2 id="-5">含まれているファイル</h2>
+<h2>使用するファイル</h2>
 
 <ul>
-<li>jquery-supergallery-plugin2.js</li>
-<li>jquery-supergallery-plugin2.min.js</li>
-</ul>
+<li>  jquery-supergallery-plugin2.js</li>
+<li>  jquery-supergallery-plugin2.min.js</li>
+</ul><p>minがついているファイルはminify済みのファイルです。通常はこちらを利用して下さい。</p>
 
-<p>minがついているファイルはminify済みのファイルです。通常はこちらを利用して下さい。</p>
-
-<h2 id="-6">使用方法</h2>
+<h2>使用方法</h2>
 
 <p><strong>目次</strong></p>
 
 <ul>
-<li><a href="#main">主な使用方法</a></li>
-<li><a href="#sub">その他の使用方法</a>
+<li>  <a href="#main">主な使用方法</a>
+</li>
+<li>  <a href="#sub">その他の使用方法</a>
+
 <ol>
 <li><a href="#sub_1">外部からの操作</a></li>
 <li><a href="#sub_2">イベント</a></li>
-</ol></li>
-</ul>
-
-<h3 id="a-namemaina"><a name="main"></a>主な使用方法</h3>
+<li><a href="#sub_3">ページ切り替え付きサムネイルのヘルパー関数</a></li>
+</ol>
+</li>
+</ul><h3>
+<a name="main"></a>主な使用方法</h3>
 
 <p>HTMLの記述例</p>
 
@@ -246,11 +487,13 @@ Safari6+(Mac)</p>
 };
 </code></pre>
 
-<h3 id="a-namesuba"><a name="sub"></a>その他の使用方法</h3>
+<h3>
+<a name="sub"></a>その他の使用方法</h3>
 
-<h4 id="a-namesub_1a"><a name="sub_1"></a>外部からの操作</h4>
+<h4>
+<a name="sub_1"></a>外部からの操作</h4>
 
-<p>外部からギャラリーを操作することも可能です。その場合は、jQueryのメソッドチェーンではなく、<code>$.supergallery()</code>を利用して下さい。 <br />
+<p>外部からギャラリーを操作することも可能です。その場合は、jQueryのメソッドチェーンではなく、<code>$.supergallery()</code>を利用して下さい。<br><br>
 第一引数に対象となる要素のセレクタ、第二引数にオプションを渡して下さい。</p>
 
 <pre><code>var gallery = $.supergallery('#gallery',{
@@ -261,7 +504,8 @@ gallery.setTimer();     //現在の自動めくり用タイマーを破棄して
 gallery.clearTimer();   //現在の自動めくり用タイマーを破棄します。
 </code></pre>
 
-<h4 id="-7">イベント</h4>
+<h4>
+<a name="sub_2"></a>イベント</h4>
 
 <p>対象の要素にて、<code>pageChangeStart</code> <code>pageChangeEnd</code>イベントが発生します。<code>pageChangeStart</code>はアニメーション開始時に、<code>pageChangeEnd</code>はアニメーション終了時に発生します。 </p>
 
@@ -277,9 +521,99 @@ gallery.clearTimer();   //現在の自動めくり用タイマーを破棄しま
     })
 </code></pre>
 
-<h2 id="-8">ライセンス</h2>
+<h4>
+<a name="sub_3"></a>ページ切り替え付きサムネイルのヘルパー関数</h4>
 
-<p>The MIT License
+<p>このプラグインをうまく使うことによって、ページ切り替えのついたサムネイルにすることも可能ですが、面倒なのでヘルパー関数を追加しました。</p>
+
+<p>HTMLの記述例</p>
+
+<pre><code>&lt;div id="gallery2" class="gallery"&gt;
+    &lt;div class="mainHolder"&gt;
+        &lt;ul class="main"&gt;
+            &lt;li&gt;&lt;img src="http://lorempixel.com/g/300/300/city/1/" alt=""&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;img src="http://lorempixel.com/g/300/300/city/2/" alt=""&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;img src="http://lorempixel.com/g/300/300/city/3/" alt=""&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;img src="http://lorempixel.com/g/300/300/city/4/" alt=""&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;img src="http://lorempixel.com/g/300/300/city/5/" alt=""&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;img src="http://lorempixel.com/g/300/300/city/6/" alt=""&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;img src="http://lorempixel.com/g/300/300/city/7/" alt=""&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;img src="http://lorempixel.com/g/300/300/city/8/" alt=""&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;img src="http://lorempixel.com/g/300/300/city/9/" alt=""&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;img src="http://lorempixel.com/g/300/300/city/10/" alt=""&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;nav&gt;
+            &lt;div class="prevBtn"&gt;PREV&lt;/div&gt;
+            &lt;div class="nextBtn"&gt;NEXT&lt;/div&gt;
+        &lt;/nav&gt;
+    &lt;/div&gt;
+    &lt;div class="thumbHolder"&gt;
+        &lt;ul class="thumbPages"&gt;
+            &lt;li&gt;
+                &lt;ul class="thumb"&gt;
+                    &lt;li class="thumbBtn"&gt;&lt;img src="http://lorempixel.com/g/100/100/city/1/" alt=""&gt;&lt;/li&gt;
+                    &lt;li class="thumbBtn"&gt;&lt;img src="http://lorempixel.com/g/100/100/city/2/" alt=""&gt;&lt;/li&gt;
+                    &lt;li class="thumbBtn"&gt;&lt;img src="http://lorempixel.com/g/100/100/city/3/" alt=""&gt;&lt;/li&gt;
+                    &lt;li class="thumbBtn"&gt;&lt;img src="http://lorempixel.com/g/100/100/city/4/" alt=""&gt;&lt;/li&gt;
+                    &lt;li class="thumbBtn"&gt;&lt;img src="http://lorempixel.com/g/100/100/city/5/" alt=""&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;ul class="thumb"&gt;
+                    &lt;li class="thumbBtn"&gt;&lt;img src="http://lorempixel.com/g/100/100/city/6/" alt=""&gt;&lt;/li&gt;
+                    &lt;li class="thumbBtn"&gt;&lt;img src="http://lorempixel.com/g/100/100/city/7/" alt=""&gt;&lt;/li&gt;
+                    &lt;li class="thumbBtn"&gt;&lt;img src="http://lorempixel.com/g/100/100/city/8/" alt=""&gt;&lt;/li&gt;
+                    &lt;li class="thumbBtn"&gt;&lt;img src="http://lorempixel.com/g/100/100/city/9/" alt=""&gt;&lt;/li&gt;
+                    &lt;li class="thumbBtn"&gt;&lt;img src="http://lorempixel.com/g/100/100/city/10/" alt=""&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>JavaScriptの記述例</p>
+
+<pre><code>$.superThumbGallery('#gallery2');
+</code></pre>
+
+<p>オプションの形式とデフォルトは下記のとおりです。</p>
+
+<pre><code>{
+    selectors:{
+        main:'.mainHolder',// メイン画像全体のセレクタ
+        thumbPages:'.thumbHolder', // サムネイルのページ全体のセレクタ
+        thumbBtns:'.thumbBtn' // サムネイル自体のセレクタ
+    },
+    thumbNum:5, //サムネイルの1ページあたりの個数
+    main:{
+        selectors:{
+            thumb:'' //必ず空にします。
+        },
+        timer:{
+            enable:true
+        }
+    },
+    thumb:{
+        selectors:{
+            main:'.thumbPages', //サムネイルのページ用のセレクタ
+            thumb:'', //必ず空にします。
+            nextBtn:'', //必ず空にします。
+            prevBtn:'' //必ず空にします。
+        },
+        animation:{
+            type:'slide'
+        },
+        timer:{
+            enable:false //必ずfalseにします。
+        }
+    }
+};
+</code></pre>
+
+<h2>ライセンス</h2>
+
+<p>The MIT License<br>
 (C) Otto Kamiya (MegazalRock) </p>
 
 <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
@@ -292,5 +626,4 @@ gallery.clearTimer();   //現在の自動めくり用タイマーを破棄しま
 
 <p>上記の著作権表示および本許諾表示を、ソフトウェアのすべての複製または重要な部分に記載するものとします。</p>
 
-<p>ソフトウェアは「現状のまま」で、明示であるか暗黙であるかを問わず、何らの保証もなく提供されます。ここでいう保証とは、商品性、特定の目的への適合性、および権利非侵害についての保証も含みますが、それに限定されるものではありません。 作者または著作権者は、契約行為、不法行為、またはそれ以外であろうと、ソフトウェアに起因または関連し、あるいはソフトウェアの使用またはその他の扱いによって生じる一切の請求、損害、その他の義務について何らの責任も負わないものとします。</p>
-</body>
+<p>ソフトウェアは「現状のまま」で、明示であるか暗黙であるかを問わず、何らの保証もなく提供されます。ここでいう保証とは、商品性、特定の目的への適合性、および権利非侵害についての保証も含みますが、それに限定されるものではありません。 作者または著作権者は、契約行為、不法行為、またはそれ以外であろうと、ソフトウェアに起因または関連し、あるいはソフトウェアの使用またはその他の扱いによって生じる一切の請求、損害、その他の義務について何らの責任も負わないものとします。</p></body>
