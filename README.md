@@ -1,5 +1,5 @@
 # jQuery Supergallery Plugin2
-Version 1.1.0
+Version 1.1.1
 
 Otto Kamiya (MegazalRock)  
 mail : otto@mgzl.jp  
@@ -7,6 +7,7 @@ twitter : @megazal_rock
 facebook : facebook.com/megazalrock
 
 ## 更新履歴
+* 1.1.1 bugfix
 * 1.1.0 ページ切り替え付きサムネイルのためのヘルパーを追加	
 * 1.0.0	InitialRelease
 

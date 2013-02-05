@@ -1,5 +1,5 @@
 /*! jQuery Supergallery Plugin2 2012-12-28
-* Vertion: 1.1
+* Vertion: 1.1.1
 * Depends: jQuery 1.8.x
 * Author: Otto Kamiya (MegazalRock) http://mgzl.jp/
 * License: MIT License*/
@@ -221,7 +221,8 @@ var core = {
 			selectors:{
 				main:'.mainHolder',
 				thumbPages:'.thumbHolder',
-				thumbBtns:'.thumbBtn'
+				thumbBtns:'.thumbBtn',
+				selected:'selected'
 			},
 			thumbNum:5,
 			main:{
@@ -260,10 +261,10 @@ var core = {
 				thumbPages.changeTo(Math.floor(num / o.thumbNum));
 				$_thumbBtns
 					.eq(num)
-						.addClass('selected')
+						.addClass(o.selectors.selected.replace('.',''))
 					.end()
 					.not(':eq('+ num +')')
-						.removeClass('selected');
+						.removeClass(o.selectors.selected.replace('.',''));
 			});
 
 		$(targetSelector)
