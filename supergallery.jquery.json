@@ -18,6 +18,6 @@
     "files": ["jquery-supergallery-plugin2.js","jquery-supergallery-plugin2.min.js"],
     "download":"https://github.com/megazalrock/jquery-supergallery-plugin2/archive/master.zip",
     "homepage": "https://github.com/megazalrock/jquery-supergallery-plugin2",
-    "docs": "https://github.com/megazalrock/jquery-supergallery-plugin2/blob/master/README.md"
+    "docs": "https://github.com/megazalrock/jquery-supergallery-plugin2/blob/master/README.md",
     "bugs":"https://github.com/megazalrock/jquery-supergallery-plugin2/issues"
 }
