@@ -8,7 +8,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section{display
 	transition:@propaty @duration @easing;
 }
 .opacity(@opacity){
-	@msopacity:@opacity * 100;
+	@msopacity:(@opacity * 100);
 	opacity:@opacity;
 	filter: alpha(opacity=@msopacity);
 	-ms-filter: "alpha(opacity=@{msopacity})";
@@ -31,7 +31,7 @@ ul,li{
 	display: block;
 }
 .gallery{
-	width: @thumbWidth * @imageNum / 2;
+	width: (@thumbWidth * @imageNum / 2);
 
 	.main{
 		width: @mainWidth;
@@ -53,8 +53,8 @@ ul,li{
 		}
 	}
 	.thumb{
-		width: @thumbWidth * @imageNum / 2;
-		height: @thumbHeight * 2;
+		width: (@thumbWidth * @imageNum / 2);
+		height: (@thumbHeight * 2);
 		li{
 			width: @thumbWidth;
 			height: @thumbHeight;
@@ -64,8 +64,8 @@ ul,li{
 
 
 			&.selected img{
-				width: @thumbWidth - 4;
-				height: @thumbHeight - 4;
+				width: (@thumbWidth - 4);
+				height: (@thumbHeight - 4);
 				border: 2px solid #C00;
 			}
 
@@ -74,9 +74,33 @@ ul,li{
 			}
 		}
 	}
+	.indicator{
+		@height:30px;
+		width: (@thumbWidth * @imageNum / 2);
+		height:@height;
+		text-align: center;
+		font-size: 0;
+		display: block;
+		li{
+			@color:#CCC;
+			cursor: pointer;
+			color: @color;
+			height: @height;
+			line-height: @height;
+			font-size: 10px;
+			width:20px;
+			text-align: center;
+			display: inline-block;
+			&.selected{
+				color: darken(@color,20%);
+			}
+			
+		}
+
+	}
 	nav{
-		@btnHeight:@thumbHeight / 2;
-		width: @thumbWidth * @imageNum / 2;
+		@btnHeight:(@thumbHeight / 2);
+		width: (@thumbWidth * @imageNum / 2);
 		height: @btnHeight;
 		margin-top: -@btnHeight;
 
@@ -94,11 +118,11 @@ ul,li{
 
 			&.nextBtn{
 				float: right;
-				border-radius: 0 @btnHeight/2 @btnHeight/2 0;
+				border-radius: 0 (@btnHeight/2) (@btnHeight/2) 0;
 			}
 			&.prevBtn{
 				float: left;
-				border-radius: @btnHeight/2 0 0 @btnHeight/2;
+				border-radius: (@btnHeight/2) 0 0 (@btnHeight/2);
 			}
 		}
 	}
@@ -106,10 +130,10 @@ ul,li{
 
 #gallery2{
 	.thumbPages{
-		width: @thumbWidth * @imageNum / 2;
+		width: (@thumbWidth * @imageNum / 2);
 		height: @thumbHeight;
 		& > li{
-			width: @thumbWidth * @imageNum / 2;
+			width: (@thumbWidth * @imageNum / 2);
 			height: @thumbHeight;
 			display: none;
 			&:first-child{
