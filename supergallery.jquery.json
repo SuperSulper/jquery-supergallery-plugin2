@@ -11,10 +11,10 @@
     }],
     "description": "最小機能しか提供しないJavaScriptが分かる人向けのギャラリープラグイン",
     "dependencies": {
-        "jquery": "1.8.0 - 1.9.0"
+        "jquery": "1.8.0 - 1.9.1"
     },
     "keywords": ["gallery","slideshow"],
-    "version": "1.1.2",
+    "version": "1.2.0",
     "files": ["jquery-supergallery-plugin2.js","jquery-supergallery-plugin2.min.js"],
     "download":"https://github.com/megazalrock/jquery-supergallery-plugin2/archive/master.zip",
     "homepage": "https://github.com/megazalrock/jquery-supergallery-plugin2",

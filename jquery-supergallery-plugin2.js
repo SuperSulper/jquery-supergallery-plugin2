@@ -1,6 +1,6 @@
-/*! jQuery Supergallery Plugin2 2012-12-28
-* Vertion: 1.1.1
-* Depends: jQuery 1.8.x
+/*! jQuery Supergallery Plugin2 2013-4-10
+* Vertion: 1.2
+* Depends: jQuery 1.8.0 - 1.9.1
 * Author: Otto Kamiya (MegazalRock) http://mgzl.jp/
 * License: MIT License*/
 (function($){
@@ -9,25 +9,26 @@ var Supergallery = function(target,_o){
 	_o = _o || {};
 	this.o = {
 		selectors:{
-			main:'.main',
-			thumb:'.thumb',
-			nextBtn:'.nextBtn',
-			prevBtn:'.prevBtn'
+			main:'.main',					//メイン画像が入っている要素のセレクタ
+			thumb:'.thumb',					//サムネイルが入っている要素のセレクタ	
+			nextBtn:'.nextBtn',				//「次へ」ボタン用のセレクタ
+			prevBtn:'.prevBtn',				//「前へ」ボタン用のセレクタ
+			indicator:'.indicator'			//ページインジケーター用のセレクタ
 		},
 		animation:{
-			type:'fade',
-			duration:400,
-			easing:'swing'
+			type:'fade',					//画像の切替アニメーションの種類 (fade:クロスフェード slide:スライド)
+			duration:400,					//画像の切替アニメーションのかかる時間
+			easing:'swing'					//画像の切替のイージング（プラグイン等で拡張したものも扱えます。）
 		},
 		timer:{
-			enable:true,
-			interval:3000,
-			stopOnHover:true
+			enable:true,					//自動めくり機能を有効にする
+			interval:3000,					//自動めくりの間隔
+			stopOnHover:true				//マウスオーバー時にタイマーを止める
 		},
 		other:{
-			initialSelect:0,
-			selectedClassName:'selected',
-			loop:true
+			initialSelect:0,				//一番はじめに選択しておく要素のインデックス
+			selectedClassName:'selected',	//選択されている時につけておくサムネイル・ページインジケーター用のクラス
+			loop:true						//最後の要素まで行ったら最初に戻るかどうか
 		}
 	};
 	$.extend(true,this.o,_o);
@@ -37,6 +38,8 @@ var Supergallery = function(target,_o){
 	this.$mainChildren = this.$main.children();
 	this.$thumb = this.$target.find(this.o.selectors.thumb);
 	this.$thumbChildren = this.$thumb.children();
+	this.$indicator = this.$target.find(this.o.selectors.indicator);
+	this.$indicatorChildren = this.$indicator.children();
 	this.$nextBtn = this.$target.find(this.o.selectors.nextBtn);
 	this.$prevBtn = this.$target.find(this.o.selectors.prevBtn);
 	this.current = null;
@@ -74,6 +77,15 @@ Supergallery.prototype.init = function(){
 	sg.changeTo(sg.o.other.initialSelect,true);
 	if(sg.$thumbChildren.length){
 		sg.$thumbChildren
+			.each(function(n){
+				$(this)
+					.on(eventType,function(){
+						sg.changeTo(n);
+					});
+			});
+	}
+	if(sg.$indicatorChildren.length){
+		sg.$indicatorChildren
 			.each(function(n){
 				$(this)
 					.on(eventType,function(){
@@ -139,8 +151,7 @@ Supergallery.prototype.changeTo = function(n,noAnimation){
 				sg.$target.trigger('pageChangeEnd',n);
 			});
 		}
-
-	}else{
+	}else if(sg.o.animation.type === 'slide'){
 		var startPos = $_target.width() * ((oldNum < n) ? 1 : -1);
 		var endPos = $_oldTarget.width() * ((oldNum < n) ? -1 : 1);
 		if(noAnimation){
@@ -178,6 +189,13 @@ Supergallery.prototype.changeTo = function(n,noAnimation){
 				});
 		}
 	}
+
+	sg.$indicatorChildren
+		.eq(n)
+			.addClass(sg.o.other.selectedClassName)
+		.end()
+		.not(':eq('+ n +')')
+			.removeClass(sg.o.other.selectedClassName);
 
 	sg.$thumbChildren
 		.eq(n)

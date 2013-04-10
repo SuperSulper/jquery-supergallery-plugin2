@@ -1,5 +1,5 @@
 # jQuery Supergallery Plugin2
-Version 1.1.1
+Version 1.2.0
 
 Otto Kamiya (MegazalRock)  
 mail : otto@mgzl.jp  
@@ -7,6 +7,7 @@ twitter : @megazal_rock
 facebook : facebook.com/megazalrock
 
 ## 更新履歴
+* 1.2.0 ページインジケーター機能追加・Readme更新
 * 1.1.1 bugfix
 * 1.1.0 ページ切り替え付きサムネイルのためのヘルパーを追加	
 * 1.0.0	InitialRelease
@@ -35,6 +36,8 @@ minがついているファイルはminify済みのファイルです。通常�
 
 **目次**
 *	[主な使用方法](#main)
+	*	[サムネイルのページ切り替え機能**なし**の場合](#main_1)
+	*	[サムネイルのページ切り替え機能**あり**の場合](#main_2)
 *	[その他の使用方法](#sub)
 	1. [外部からの操作](#sub_1)
 	2. [イベント](#sub_2)
@@ -42,10 +45,12 @@ minがついているファイルはminify済みのファイルです。通常�
 
 ### <a name="main"></a>主な使用方法
 
-HTMLの記述例
+#### <a name="main_1"></a>サムネイルのページ切り替え機能**なし**の場合
 
-	<div id="gallery">
-		<ul id="main">
+##### HTMLの記述例
+
+	<div id="gallery" class="gallery">
+		<ul class="main">
 			<li><img src="http://lorempixel.com/g/300/300/city/1/" alt=""></li>
 			<li><img src="http://lorempixel.com/g/300/300/city/2/" alt=""></li>
 			<li><img src="http://lorempixel.com/g/300/300/city/3/" alt=""></li>
@@ -57,7 +62,23 @@ HTMLの記述例
 			<li><img src="http://lorempixel.com/g/300/300/city/9/" alt=""></li>
 			<li><img src="http://lorempixel.com/g/300/300/city/10/" alt=""></li>
 		</ul>
-		<ul id="thumb">
+		<nav>
+			<div class="prevBtn">PREV</div>
+			<div class="nextBtn">NEXT</div>
+		</nav>
+		<ul class="indicator">
+			<li>●</li>
+			<li>●</li>
+			<li>●</li>
+			<li>●</li>
+			<li>●</li>
+			<li>●</li>
+			<li>●</li>
+			<li>●</li>
+			<li>●</li>
+			<li>●</li>
+		</ul>
+		<ul class="thumb">
 			<li><img src="http://lorempixel.com/g/100/100/city/1/" alt=""></li>
 			<li><img src="http://lorempixel.com/g/100/100/city/2/" alt=""></li>
 			<li><img src="http://lorempixel.com/g/100/100/city/3/" alt=""></li>
@@ -69,46 +90,162 @@ HTMLの記述例
 			<li><img src="http://lorempixel.com/g/100/100/city/9/" alt=""></li>
 			<li><img src="http://lorempixel.com/g/100/100/city/10/" alt=""></li>
 		</ul>
-		<nav>
-			<div id="prevBtn">PREV</div>
-			<div id="nextBtn">NEXT</div>
-		</nav>
 	</div>
 
-Javascriptの記述例（全てデフォルトの設定で動作させる場合）
+##### Javascriptの記述例
+
+すべてデフォルトで動作させる場合は下記のように選択した要素で`supergallery()`を呼びます。
 
 	$(function(){
 		$('#gallery').supergallery();
 	});
 
-たったこれだけで、動作させることが可能です。
+デフォルトの設定を変更する場合は、引数にオブジェクト形式で渡します。下記で設定されているものはデフォルトで設定されているものと同じです。	
 
-デフォルトの設定は下記のとおりです。
+	$(function(){
+		$('#gallery').supergallery({
+			selectors:{
+				main:'.main',					//メイン画像が入っている要素のセレクタ
+				thumb:'.thumb',					//サムネイルが入っている要素のセレクタ	
+				nextBtn:'.nextBtn',				//「次へ」ボタン用のセレクタ
+				prevBtn:'.prevBtn',				//「前へ」ボタン用のセレクタ
+				indicator:'.indicator'			//ページインジケーター用のセレクタ
+			},
+			animation:{
+				type:'fade',					//画像の切替アニメーションの種類 (fade:クロスフェード slide:スライド)
+				duration:400,					//画像の切替アニメーションのかかる時間
+				easing:'swing'					//画像の切替のイージング（プラグイン等で拡張したものも扱えます。）
+			},
+			timer:{
+				enable:true,					//自動めくり機能を有効にする
+				interval:3000,					//自動めくりの間隔
+				stopOnHover:true				//マウスオーバー時にタイマーを止める
+			},
+			other:{
+				initialSelect:0,				//一番はじめに選択しておく要素のインデックス
+				selectedClassName:'selected',	//選択されている時につけておくサムネイル・ページインジケーター用のクラス
+				loop:true						//最後の要素まで行ったら最初に戻るかどうか
+			}
+		});
+	});
 
-	{
-		selectors:{
-			main:'#main',					//メイン画像が入っている要素のセレクタ
-			thumb:'#thumb',					//サムネイルが入っている要素のセレクタ	
-			nextBtn:'#nextBtn',				//「次へ」ボタン用のセレクタ
-			prevBtn:'#prevBtn'				//「前へ」ボタン用のセレクタ
-		},
-		animation:{
-			type:'fade',					//画像の切替アニメーションの種類 (fade:クロスフェード slide:スライド)
-			duration:400,					//画像の切替アニメーションのかかる時間
-			easing:'swing'					//画像の切替のイージング（プラグイン等で拡張したものも扱えます。）
-		},
-		timer:{
-			enable:true,					//自動めくり機能を有効にする
-			interval:3000,					//自動めくりの間隔
-			stopOnHover:true				//マウスオーバー時にタイマーを止める
-		},
-		other:{
-			initialSelect:0,				//一番はじめに選択しておく要素のインデックス
-			selectedClassName:'selected',	//選択されている時につけておくサムネイル用のクラス
-			loop:true						//最後の要素まで行ったら最初に戻るかどうか
-		}
-	};
+#### <a name="main_2"></a>サムネイルのページ切り替え機能**あり**の場合	
 
+##### HTMLの記述例
+
+	<div id="gallery2" class="gallery">
+		<div class="mainHolder">
+			<ul class="main">
+				<li><img src="http://lorempixel.com/g/300/300/city/1/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/2/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/3/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/4/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/5/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/6/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/7/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/8/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/9/" alt=""></li>
+				<li><img src="http://lorempixel.com/g/300/300/city/10/" alt=""></li>
+			</ul>
+			<nav>
+				<div class="prevBtn">PREV</div>
+				<div class="nextBtn">NEXT</div>
+			</nav>
+			<ul class="indicator">
+				<li>●</li>
+				<li>●</li>
+				<li>●</li>
+				<li>●</li>
+				<li>●</li>
+				<li>●</li>
+				<li>●</li>
+				<li>●</li>
+				<li>●</li>
+				<li>●</li>
+			</ul>
+		</div>
+		<div class="thumbHolder">
+			<ul class="thumbPages">
+				<li>
+					<ul class="thumb">
+						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/1/" alt=""></li>
+						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/2/" alt=""></li>
+						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/3/" alt=""></li>
+						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/4/" alt=""></li>
+						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/5/" alt=""></li>
+					</ul>
+				</li>
+				<li>
+					<ul class="thumb">
+						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/6/" alt=""></li>
+						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/7/" alt=""></li>
+						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/8/" alt=""></li>
+						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/9/" alt=""></li>
+						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/10/" alt=""></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+##### Javascriptの記述例
+
+すべてデフォルトで動作させる場合は下記のように`$.superThumbGallery()`を呼びます。  
+この場合では`$().superThumbGallery()`で呼び出すことは出来ないので注意して下さい。
+
+	$(function(){
+		var gallery2 = $.superThumbGallery('#gallery2');
+	});
+
+デフォルトの設定を変更する場合は、第二引数にオブジェクト形式で渡します。下記はデフォルトで設定されているものと同じです。  
+基本的にデフォルトの設定はサムネイルのページ切り替え機能なしのものと同じですが、違う部分にのみコメントで説明を入れてあります。  
+また記述されていないものについては値を渡す必要はありません。	
+
+	$(function(){
+		$.superThumbGallery('#gallery2',{
+			selectors:{
+				main:'.mainHolder', 		//メイン画像のラッパーのセレクタ
+				thumbPages:'.thumbHolder',	//サムネイルのラッパーのセレクタ
+				thumbBtns:'.thumbBtn'		//クリックの対象となるセレクタ
+			},
+			main:{							//メイン画像についての設定
+				selectors:{
+					main:'.main',
+					nextBtn:'.nextBtn',
+					prevBtn:'.prevBtn',
+					indicator:'.indicator'
+				},
+				animation:{
+					type:'fade',
+					duration:400,
+					easing:'swing'
+				},
+				timer:{
+					enable:true,
+					interval:3000,
+					stopOnHover:true
+				},
+				other:{
+					initialSelect:0,
+					selectedClassName:'selected',
+					loop:true
+				}
+			},
+			thumb:{							//サムネイルについての設定	
+				selectors:{
+					main:'.thumbPages'			//サムネイルのページ用のセレクタ
+				},
+				animation:{
+					type:'slide',				//ページ切替アニメーションの種類
+					duration:400,
+					easing:'swing'
+				},
+				other:{
+					selectedClassName:'selected'
+				}
+			}
+		});
+	});
 
 ### <a name="sub"></a>その他の使用方法
 
