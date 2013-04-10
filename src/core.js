@@ -27,7 +27,7 @@ var Supergallery = function(target,_o){
 	};
 	$.extend(true,this.o,_o);
 
-	this.$target = $(target);
+	this.$target = $(target).data(this);
 	this.$main = this.$target.find(this.o.selectors.main);
 	this.$mainChildren = this.$main.children();
 	this.$thumb = this.$target.find(this.o.selectors.thumb);
