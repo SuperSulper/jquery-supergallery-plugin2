@@ -14,7 +14,7 @@
         "jquery": "1.8.0 - 1.9.1"
     },
     "keywords": ["gallery","slideshow"],
-    "version": "1.2.0",
+    "version": "1.2.1",
     "files": ["jquery-supergallery-plugin2.js","jquery-supergallery-plugin2.min.js"],
     "download":"https://github.com/megazalrock/jquery-supergallery-plugin2/archive/master.zip",
     "homepage": "https://github.com/megazalrock/jquery-supergallery-plugin2",

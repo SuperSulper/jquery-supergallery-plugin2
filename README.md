@@ -1,5 +1,5 @@
 # jQuery Supergallery Plugin2
-Version 1.2.0
+Version 1.2.1
 
 Otto Kamiya (MegazalRock)  
 mail : otto@mgzl.jp  
