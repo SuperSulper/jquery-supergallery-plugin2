@@ -1,23 +1,27 @@
 {
-    "name": "supergallery",
-    "title": "jQuery Supergallery Plugin2", 
-    "author": {
-        "name": "Otto Kamiya (MegazalRock)",
-        "url": "http://mgzl.jp"
-    },
-    "licenses": [{
-        "type":"MIT",
-        "url": "http://opensource.org/licenses/MIT"
-    }],
-    "description": "最小機能しか提供しないJavaScriptが分かる人向けのギャラリープラグイン",
-    "dependencies": {
-        "jquery": "1.8.0 - 1.9.1"
-    },
-    "keywords": ["gallery","slideshow"],
-    "version": "1.2.1",
-    "files": ["jquery-supergallery-plugin2.js","jquery-supergallery-plugin2.min.js"],
-    "download":"https://github.com/megazalrock/jquery-supergallery-plugin2/archive/master.zip",
-    "homepage": "https://github.com/megazalrock/jquery-supergallery-plugin2",
-    "docs": "https://github.com/megazalrock/jquery-supergallery-plugin2/blob/master/README.md",
-    "bugs":"https://github.com/megazalrock/jquery-supergallery-plugin2/issues"
+  "name": "supergallery",
+  "title": "jQuery Supergallery Plugin2",
+  "description": "最小機能しか提供しないJavaScriptが分かる人向けのギャラリープラグイン",
+  "version": "1.2.2",
+  "homepage": "https://github.com/megazalrock/jquery-supergallery-plugin2",
+  "author": {
+    "name": "Otto Kamiya (MegazalRock)",
+    "email": "otto@mgzl.jp",
+    "url": "http://mgzl.jp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/megazalrock/jquery-supergallery-plugin2.git"
+  },
+  "bugs": "https://github.com/megazalrock/jquery-supergallery-plugin2/issues",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/megazalrock/jquery-supergallery-plugin2/blob/master/LICENSE-MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": "1.8.0 - 1.9.1"
+  },
+  "keywords": ["gallery","slideshow"]
 }
