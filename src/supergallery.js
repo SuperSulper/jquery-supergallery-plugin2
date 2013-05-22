@@ -184,6 +184,13 @@
 			}
 		}
 
+		sg.$mainChildren
+			.eq(n)
+			.addClass(sg.o.other.selectedClassName)
+				.end()
+			.not(':eq('+ n +')')
+				.removeClass(sg.o.other.selectedClassName);
+
 		sg.$indicatorChildren
 			.eq(n)
 				.addClass(sg.o.other.selectedClassName)
