@@ -299,13 +299,18 @@
 					thumbBtns:'.thumbBtn',
 					selected:'selected'
 				},
+				timer:{
+					enable:true,
+					interval:3000,
+					stopOnHover:true
+				},
 				thumbNum:5,
 				main:{
 					selectors:{
 						thumb:''
 					},
 					timer:{
-						enable:true
+						enable:false
 					}
 				},
 				thumb:{
@@ -324,6 +329,7 @@
 				}
 			};
 			$.extend(true,o,_o);
+			$.extend(true,o.main.timer,o.timer);
 			var mainSelector = [targetSelector,o.selectors.main].join(' ');
 			var thumbPagesSlector = [targetSelector,o.selectors.thumbPages].join(' ');
 			var main = $.supergallery(mainSelector,o.main);
@@ -332,7 +338,7 @@
 
 			$(mainSelector)
 				.on('pageChangeStart',function(e,num){
-					thumbPages.changeTo(Math.floor(num / o.thumbNum));
+					thumbPages.changeTo(parseInt(num / o.thumbNum,10));
 					$_thumbBtns
 						.eq(num)
 							.addClass(o.selectors.selected.replace('.',''))
@@ -341,12 +347,15 @@
 							.removeClass(o.selectors.selected.replace('.',''));
 				});
 
-			$(targetSelector)
-				.hover(function(){
-					main.clearTimer();
-				},function(){
-					main.setTimer();
-				});
+			if(o.timer.enable && o.timer.interval && o.timer.stopOnHover){
+				$(targetSelector)
+					.hover(function(){
+						main.clearTimer();
+					},function(){
+						main.setTimer();
+					});
+			}
+
 
 			$_thumbBtns
 				.each(function(n){
