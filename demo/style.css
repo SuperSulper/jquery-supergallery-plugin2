@@ -248,19 +248,6 @@ li {
   letter-spacing: 0.2em;
   color: #FFF;
   cursor: pointer;
-  opacity: 1;
-  filter: alpha(opacity=100);
-  -ms-filter: "alpha(opacity=100)";
-  -webkit-transition: opacity 0.2s ease-in-out;
-  -moz-transition: opacity 0.2s ease-in-out;
-  -ms-transition: opacity 0.2s ease-in-out;
-  -o-transition: opacity 0.2s ease-in-out;
-  transition: opacity 0.2s ease-in-out;
-}
-.gallery nav div:hover {
-  opacity: 0.5;
-  filter: alpha(opacity=100);
-  -ms-filter: "alpha(opacity=50)";
 }
 .gallery nav div.nextBtn {
   float: right;

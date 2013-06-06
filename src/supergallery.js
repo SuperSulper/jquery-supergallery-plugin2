@@ -19,6 +19,12 @@
 				interval:3000,					//自動めくりの間隔
 				stopOnHover:true				//マウスオーバー時にタイマーを止める
 			},
+			nav:{
+				autoHideNaviBtn:true,
+				duration:400,
+				easing:'swing',
+				hiddenClassName:'hidden'
+			},
 			other:{
 				initialSelect:0,				//一番はじめに選択しておく要素のインデックス
 				selectedClassName:'selected',	//選択されている時につけておくサムネイル・ページインジケーター用のクラス
@@ -39,6 +45,7 @@
 		this.current = null;
 		this.timerId = null;
 		this.num = this.$mainChildren.length;
+		this.length = this.num;
 		this.init();
 	};
 
@@ -68,7 +75,6 @@
 			.not(':eq(' +sg.o.other.initialSelect+ ')')
 				.css({display:'none'});
 
-		sg.changeTo(sg.o.other.initialSelect,true);
 		if(sg.$thumbChildren.length){
 			sg.$thumbChildren
 				.each(function(n){
@@ -123,6 +129,8 @@
 					sg.setTimer();
 				});
 		}
+		sg.changeTo(sg.o.other.initialSelect,true);
+
 		return this;
 	};
 	Supergallery.prototype.changeTo = function(n,noAnimation){
@@ -132,18 +140,20 @@
 		var duration = noAnimation ? 0 :sg.o.animation.duration;
 		var oldNum = sg.current;
 		var $_target = sg.$mainChildren.eq(n),$_oldTarget = sg.$mainChildren.eq(oldNum);
+		var navDuration = noAnimation ? 0 : sg.o.nav.duration;
 
 		if(sg.o.animation.type === 'fade'){
 			$_target
 				.stop(true,false)
-				.fadeTo(duration,1);
-			if(oldNum !== null){
-				$_oldTarget
-				.stop(true,false)
-				.fadeTo(duration,0,function(){
-					$(this).css({display:'none'});
+				.fadeTo(duration,1,function(){
 					sg.$target.trigger('pageChangeEnd',n);
 				});
+			if(oldNum !== null){
+				$_oldTarget
+					.stop(true,false)
+					.fadeTo(duration,0,function(){
+						$(this).css({display:'none'});
+					});
 			}
 		}else if(sg.o.animation.type === 'slide'){
 			var startPos = $_target.width() * ((oldNum < n) ? 1 : -1);
@@ -160,6 +170,7 @@
 							display:'none'
 						});
 				}
+				sg.$target.trigger('pageChangeEnd',n);
 			}else{
 				$_target
 				.css({
@@ -204,6 +215,51 @@
 			.end()
 			.not(':eq(' + n + ')')
 				.removeClass(sg.o.other.selectedClassName);
+
+		if(!sg.o.other.loop){	
+			if(n <= 0){
+				sg.$prevBtn
+					.addClass(sg.o.nav.hiddenClassName);
+			}else{	
+				sg.$prevBtn
+					.removeClass(sg.o.nav.hiddenClassName);
+			}
+			if(n >= sg.length - 1){	
+				sg.$nextBtn
+					.addClass(sg.o.nav.hiddenClassName);
+			}else{
+				sg.$nextBtn
+					.removeClass(sg.o.nav.hiddenClassName);
+			}
+		}
+
+		if(sg.o.nav.autoHideNaviBtn && !sg.o.other.loop){
+			if(n <= 0){
+				sg.$prevBtn
+					.stop(true,false)
+					.fadeTo(navDuration,0,sg.o.nav.easing,function(){
+						sg.$prevBtn
+							.hide();
+					});
+			}else{
+				sg.$prevBtn
+					.stop(true,false)
+					.fadeTo(navDuration,1);
+			}
+			if(n >= sg.length - 1){
+				sg.$nextBtn
+					.stop(true,false)
+					.fadeTo(navDuration,0,sg.o.nav.easing,function(){
+						sg.$nextBtn
+							.hide();
+					});
+			}else{
+				sg.$nextBtn
+					.stop(true,false)
+					.fadeTo(navDuration,1);
+			}
+		}
+
 		sg.current = n;
 	};
 
@@ -270,7 +326,6 @@
 			$.extend(true,o,_o);
 			var mainSelector = [targetSelector,o.selectors.main].join(' ');
 			var thumbPagesSlector = [targetSelector,o.selectors.thumbPages].join(' ');
-
 			var main = $.supergallery(mainSelector,o.main);
 			var thumbPages = $.supergallery(thumbPagesSlector,o.thumb);
 			var $_thumbBtns = $([targetSelector,o.selectors.thumbPages,o.thumb.selectors.main,o.selectors.thumbBtns].join(' '));

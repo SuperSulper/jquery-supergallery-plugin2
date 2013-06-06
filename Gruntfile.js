@@ -91,11 +91,11 @@ module.exports = function(grunt) {
       },
       demo:{
         files:'<%= less.demo.src %>',
-        tasks:['demo']
+        tasks:['less:demo']
       },
       src: {
         files: '<%= jshint.src.src %>',
-        tasks: ['jshint:src']
+        tasks: ['jshint:src','clean','concat','uglify']
       },
     },
   });

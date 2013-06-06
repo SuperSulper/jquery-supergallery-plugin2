@@ -6,12 +6,16 @@
 <meta name="format-detection" content="telephone=no" />
 <link rel="stylesheet" type="text/css" href="style.css" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
-<script type="text/javascript" src="../dist/jquery-supergallery-plugin2.min.js"></script>
+<script type="text/javascript" src="../dist/jquery-supergallery-plugin2.js"></script>
 <script type="text/javascript">
 	$(function(){
 		//#gallery
 		$('#gallery')
-			.supergallery()
+			.supergallery({
+				other:{
+					loop:false
+				}
+			})
 			.on('pageChangeStart',function(e,num){
 				//console.log(e.type,num);
 				})
@@ -20,7 +24,13 @@
 			});
 
 		//#gallery2
-		var gallery2 = $.superThumbGallery('#gallery2');
+		var gallery2 = $.superThumbGallery('#gallery2',{
+			main:{
+				timer:{
+					enable:false
+				}
+			}
+		});
 			
 	});
 </script>
