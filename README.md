@@ -123,6 +123,12 @@ minがついているファイルはminify済みのファイルです。通常�
 				interval:3000,					//自動めくりの間隔
 				stopOnHover:true				//マウスオーバー時にタイマーを止める
 			},
+			nav:{
+				autoHideNaviBtn:true,			//最初・最後のページでprev・nextボタンを非表示にするかどうか
+				duration:400,					//非表示にするアニメーションのかかる時間
+				easing:'swing',					//非表示にするアニメーションのイージング	
+				hiddenClassName:'hidden'		//非表示にした際に付加するクラス名
+			},
 			other:{
 				initialSelect:0,				//一番はじめに選択しておく要素のインデックス
 				selectedClassName:'selected',	//選択されている時につけておくサムネイル・ページインジケーター用のクラス
