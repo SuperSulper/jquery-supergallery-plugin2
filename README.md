@@ -267,6 +267,7 @@ minがついているファイルはminify済みのファイルです。通常�
 	gallery.changeTo(3);	//3ページ目へ変更
 	gallery.setTimer();		//現在の自動めくり用タイマーを破棄して、新たにタイマーを設定します。
 	gallery.clearTimer();	//現在の自動めくり用タイマーを破棄します。
+	gallery.destroy(true);	//各種イベントを破棄し初期化前の状態に戻します。引数にtrueを渡すと、styles属性も消去します。
 
 #### <a name="sub_2"></a>イベント
 対象の要素にて、`pageChangeStart` `pageChangeEnd`イベントが発生します。`pageChangeStart`はアニメーション開始時に、`pageChangeEnd`はアニメーション終了時に発生します。	
