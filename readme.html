@@ -1,9 +1,8 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><style>html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
 
 body{
   color:#444;
-  font-family:Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman',
-              "Hiragino Sans GB", "STXihei", "微软雅黑", serif;
+  font-family:'Helvetica Neue',Helvetica,Arial,Verdana,'ヒラギノ角ゴ ProN W3','Hiragino Kaku Gothic ProN','メイリオ',Meiryo,'ＭＳ Ｐゴシック','MS PGothic', sans-serif;
   font-size:12px;
   line-height:1.5em;
   background:#fefefe;
@@ -122,7 +121,7 @@ body{font-size:16px;}
 }
 </style></head><body><h1 id="jquery-supergallery-plugin2">jQuery Supergallery Plugin2</h1>
 
-<p>Version 1.2.1</p>
+<p>Version 1.2.5</p>
 
 <p>Otto Kamiya (MegazalRock) <br />
 mail : otto@mgzl.jp <br />
@@ -132,6 +131,9 @@ facebook : facebook.com/megazalrock</p>
 <h2>更新履歴</h2>
 
 <ul>
+<li>1.2.5 .destroy()の実装・README.mdの更新</li>
+<li>1.2.4 Fixes #4 #5 #9</li>
+<li>1.2.3 メイン画像にもselectedクラスを付与するように変更</li>
 <li>1.2.0 ページインジケーター機能追加・Readme更新</li>
 <li>1.1.1 bugfix</li>
 <li>1.1.0 ページ切り替え付きサムネイルのためのヘルパーを追加   </li>
@@ -262,9 +264,15 @@ Safari6+(Mac)</p>
             interval:3000,                  //自動めくりの間隔
             stopOnHover:true                //マウスオーバー時にタイマーを止める
         },
+        nav:{
+            autoHideNaviBtn:true,           //最初・最後のページでprev・nextボタンを非表示にするかどうか
+            duration:400,                   //非表示にするアニメーションのかかる時間
+            easing:'swing',                 //非表示にするアニメーションのイージング   
+            hiddenClassName:'hidden'        //非表示にした際に付加するクラス名
+        },
         other:{
             initialSelect:0,                //一番はじめに選択しておく要素のインデックス
-            selectedClassName:'selected',   //選択されている時につけておくサムネイル・ページインジケーター用のクラス
+            selectedClassName:'selected',   //選択時につけておくサムネイル・ページインジケーター用のクラス
             loop:true                       //最後の要素まで行ったら最初に戻るかどうか
         }
     });
@@ -405,6 +413,7 @@ Safari6+(Mac)</p>
 gallery.changeTo(3);    //3ページ目へ変更
 gallery.setTimer();     //現在の自動めくり用タイマーを破棄して、新たにタイマーを設定します。
 gallery.clearTimer();   //現在の自動めくり用タイマーを破棄します。
+gallery.destroy(true);  //各種イベントを破棄し初期化前の状態に戻します。引数にtrueを渡すと、styles属性も消去します。
 </code></pre>
 
 <h4 id="a-namesub_2a"><a name="sub_2"></a>イベント</h4>
