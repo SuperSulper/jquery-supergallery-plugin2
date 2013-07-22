@@ -1,4 +1,4 @@
-/*! jQuery Supergallery Plugin2 2013-06-07
+/*! jQuery Supergallery Plugin2 2013-07-23
  *  Vertion : 1.2.4
  *  Dependencies : jQuery 1.8.0 - 1.9.1
  *  Author : Otto Kamiya (MegazalRock)
@@ -38,8 +38,7 @@
 			}
 		};
 		$.extend(true,this.o,_o);
-
-		this.$target = $(target).data(this);
+		this.$target = $(target);
 		this.$main = this.$target.find(this.o.selectors.main);
 		this.$mainChildren = this.$main.children();
 		this.$thumb = this.$target.find(this.o.selectors.thumb);
@@ -129,14 +128,15 @@
 		}
 		if(sg.o.timer.enable && sg.o.timer.interval && sg.o.timer.stopOnHover){
 			sg.$target
-				.hover(function(){
+				.on('mouseover',function(){
 					sg.clearTimer();
-				},function(){
+				})
+				.on('mouseout',function(){
 					sg.setTimer();
 				});
 		}
 		sg.changeTo(sg.o.other.initialSelect,true);
-
+		sg.$target.data('supergallery',sg);
 		return this;
 	};
 	Supergallery.prototype.changeTo = function(n,noAnimation){
@@ -290,6 +290,36 @@
 
 	Supergallery.prototype.clearTimer = function(){
 		clearInterval(this.timerId);
+	};
+
+	Supergallery.prototype.destroy = function(removeStyles){
+		var sg = this,eventType = ('ontouchend' in window) ? 'touchend' : 'click';
+		removeStyles = removeStyles || false;
+		sg.clearTimer();
+		sg.$nextBtn
+			.add(sg.$prevBtn)
+			.add(sg.$indicatorChildren)
+			.add(sg.$thumbChildren)
+			.off(eventType);
+
+		sg.$target
+			.off('mouseover')
+			.off('mouseout');
+
+		sg.$target
+			.find('.' + sg.o.other.selectedClassName)
+				.removeClass(sg.o.other.selectedClassName);
+
+		sg.$target
+			.removeData('supergallery');
+
+		if(removeStyles){
+			sg.$main
+				.add(sg.$mainChildren)
+				.add(sg.$prevBtn)
+				.add(sg.$nextBtn)
+				.removeAttr('style');
+		}
 	};
 
 	var core = {
