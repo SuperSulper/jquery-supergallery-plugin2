@@ -1,5 +1,5 @@
 # jQuery Supergallery Plugin2
-Version 1.2.4
+Version 1.2.5
 
 Otto Kamiya (MegazalRock)  
 mail : otto@mgzl.jp  
@@ -7,6 +7,7 @@ twitter : @megazal_rock
 facebook : facebook.com/megazalrock
 
 ## 更新履歴
+* 1.2.5 .destroy()の実装・README.mdの更新
 * 1.2.4 Fixes #4 #5 #9
 * 1.2.3 メイン画像にもselectedクラスを付与するように変更
 * 1.2.0 ページインジケーター機能追加・Readme更新
@@ -131,7 +132,7 @@ minがついているファイルはminify済みのファイルです。通常�
 			},
 			other:{
 				initialSelect:0,				//一番はじめに選択しておく要素のインデックス
-				selectedClassName:'selected',	//選択されている時につけておくサムネイル・ページインジケーター用のクラス
+				selectedClassName:'selected',	//選択時につけておくサムネイル・ページインジケーター用のクラス
 				loop:true						//最後の要素まで行ったら最初に戻るかどうか
 			}
 		});
