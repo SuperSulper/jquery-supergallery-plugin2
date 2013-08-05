@@ -28,7 +28,9 @@
 			other:{
 				initialSelect:0,				//一番はじめに選択しておく要素のインデックス
 				selectedClassName:'selected',	//選択されている時につけておくサムネイル・ページインジケーター用のクラス
-				loop:true						//最後の要素まで行ったら最初に戻るかどうか
+				loop:true,						//最後の要素まで行ったら最初に戻るかどうか
+				disablePageChangeStartEvent:false,
+				disablePageChangeEndEvent:false
 			}
 		};
 		$.extend(true,this.o,_o);
@@ -136,7 +138,9 @@
 	Supergallery.prototype.changeTo = function(n,noAnimation){
 		var sg = this;
 		if(n === sg.current){ return false;}
-		sg.$target.trigger('pageChangeStart',n);
+		if(!sg.o.other.disablePageChangeStartEvent){
+			sg.$target.trigger('pageChangeStart',n);
+		}
 		var duration = noAnimation ? 0 :sg.o.animation.duration;
 		var oldNum = sg.current;
 		var $_target = sg.$mainChildren.eq(n),$_oldTarget = sg.$mainChildren.eq(oldNum);
@@ -146,7 +150,9 @@
 			$_target
 				.stop(true,false)
 				.fadeTo(duration,1,function(){
-					sg.$target.trigger('pageChangeEnd',n);
+					if(!sg.o.other.disablePageChangeEndEvent){
+						sg.$target.trigger('pageChangeEnd',n);
+					}
 				});
 			if(oldNum !== null){
 				$_oldTarget
@@ -170,7 +176,10 @@
 							display:'none'
 						});
 				}
-				sg.$target.trigger('pageChangeEnd',n);
+
+				if(!sg.o.other.disablePageChangeEndEvent){
+					sg.$target.trigger('pageChangeEnd',n);
+				}
 			}else{
 				$_target
 				.css({
@@ -190,7 +199,9 @@
 							.css({
 								display:'none'
 							});
-						sg.$target.trigger('pageChangeEnd',n);
+						if(!sg.o.other.disablePageChangeEndEvent){
+							sg.$target.trigger('pageChangeEnd',n);
+						}
 					});
 			}
 		}
