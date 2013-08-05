@@ -137,7 +137,13 @@
 	};
 	Supergallery.prototype.changeTo = function(n,noAnimation){
 		var sg = this;
+		if(n === 'next'){
+			n = (sg.current + 1 < sg.length) ? sg.current + 1 : (sg.o.other.loop) ? 0 : sg.current;
+		}else if(n === 'prev'){
+			n = (sg.current - 1 >= 0) ? sg.current - 1 : (sg.o.other.loop) ? sg.length - 1 : sg.current;
+		}
 		if(n === sg.current){ return false;}
+
 		if(!sg.o.other.disablePageChangeStartEvent){
 			sg.$target.trigger('pageChangeStart',n);
 		}
