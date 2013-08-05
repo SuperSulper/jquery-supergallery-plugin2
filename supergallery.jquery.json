@@ -2,7 +2,7 @@
   "name": "supergallery",
   "title": "jQuery Supergallery Plugin2",
   "description": "最小機能しか提供しないJavaScriptが分かる人向けのギャラリープラグイン",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "homepage": "https://github.com/megazalrock/jquery-supergallery-plugin2",
   "author": {
     "name": "Otto Kamiya (MegazalRock)",
@@ -21,7 +21,7 @@
     }
   ],
   "dependencies": {
-    "jquery": "1.8.0 - 1.9.1"
+    "jquery": "1.8.0 - 2.0.3"
   },
   "keywords": ["gallery","slideshow"]
 }
