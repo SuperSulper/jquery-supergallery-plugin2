@@ -219,8 +219,8 @@
 				}
 			}
 		}else if(sg.o.animation.type === 'slide'){
-			var startPos = $_target.width() * ((oldNum < n) ? 1 : -1);
-			var endPos = $_oldTarget.width() * ((oldNum < n) ? -1 : 1);
+			var startPos = $_target.outerWidth() * ((oldNum < n) ? 1 : -1);
+			var endPos = $_oldTarget.outerWidth() * ((oldNum < n) ? -1 : 1);
 			if(noAnimation){
 				$_target
 					.css({
@@ -246,6 +246,7 @@
 					if(!sg.o.other.disablePageChangeEndEvent){
 						sg.$target.trigger('pageChangeEnd',n);
 					}
+
 				};
 				if(sg.canUseCss3Transition && !sg.o.other.disableCss3Transition){
 					$_target
