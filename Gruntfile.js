@@ -2,6 +2,11 @@
 
 module.exports = function(grunt) {
 
+  var js_files = [
+    'src/supergallery.js',
+    'src/jquery.transit.js'
+  ];
+
   // Project configuration.
   grunt.initConfig({
     // Metadata.
@@ -11,7 +16,14 @@ module.exports = function(grunt) {
       ' *  Dependencies : jQuery <%= pkg.dependencies.jquery %>\n'+
       ' *  Author : <%= pkg.author.name %>\n'+
       ' *  Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;\n' +
-      ' *  License : <%= pkg.license %>*/\n',
+      ' *  License : <%= pkg.licenses[0].type %> <%= pkg.licenses[0].url %>\n' + 
+      ' *  ----\n' +
+      ' *  jQuery Transit - CSS3 transitions and transformations, \n' +
+      ' *  (c) 2011-2012 Rico Sta. Cruz <rico@ricostacruz.com>, \n' +
+      ' *  MIT Licensed. \n' +
+      ' * \n' +
+      ' *  http://ricostacruz.com/jquery.transit \n'+
+      ' *  http://github.com/rstacruz/jquery.transit */\n',
     // Task configuration.
     clean: {
       files: ['dist']
@@ -22,7 +34,7 @@ module.exports = function(grunt) {
         stripBanners: true
       },
       dist: {
-        src: ['src/*.js'],
+        src: js_files,
         dest: 'dist/jquery-<%= pkg.name %>-plugin2.js'
       },
     },
@@ -49,7 +61,7 @@ module.exports = function(grunt) {
         options: {
           jshintrc: 'src/.jshintrc'
         },
-        src: ['src/**/*.js']
+        src: ['src/supergallery.js']
       },
       test: {
         options: {
@@ -94,7 +106,7 @@ module.exports = function(grunt) {
         tasks:['less:demo']
       },
       src: {
-        files: '<%= jshint.src.src %>',
+        files: 'src/**/*.js',
         tasks: ['jshint:src','clean','concat','uglify']
       },
     },

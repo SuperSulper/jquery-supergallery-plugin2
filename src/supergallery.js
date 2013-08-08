@@ -30,7 +30,8 @@
 				selectedClassName:'selected',	//選択されている時につけておくサムネイル・ページインジケーター用のクラス
 				loop:true,						//最後の要素まで行ったら最初に戻るかどうか
 				disablePageChangeStartEvent:false,
-				disablePageChangeEndEvent:false
+				disablePageChangeEndEvent:false,
+				disableCss3Transition:false
 			}
 		};
 		$.extend(true,this.o,_o);
@@ -47,6 +48,10 @@
 		this.timerId = null;
 		this.num = this.$mainChildren.length;
 		this.length = this.num;
+		this.canUseCss3Transition = (function(){
+			var body = document.body || document.documentElement,bodyStyle = body.style;
+			return bodyStyle.WebkitBackgroundSize !== undefined || bodyStyle.MozBackgroundSize !== undefined || bodyStyle.OBackgroundSize !== undefined || bodyStyle.backgroundSize !== undefined;
+		})();
 		this.init();
 	};
 
@@ -59,7 +64,6 @@
 		if(!this.$mainChildren.length){
 			throw 'mainの中に何もありません！';
 		}
-
 
 		sg.$main
 			.css({
@@ -75,6 +79,18 @@
 			.end()
 			.not(':eq(' +sg.o.other.initialSelect+ ')')
 				.css({display:'none'});
+		if(sg.canUseCss3Transition && !sg.o.other.disableCss3Transition){
+			if(sg.o.animation.type === 'fade'){
+				sg.$mainChildren
+					.css({
+						opacity:0
+					});
+			}
+			if(sg.o.animation.easing === 'swing'){
+				sg.o.animation.easing = 'in-out';
+			}
+		}
+		
 
 		if(sg.$thumbChildren.length){
 			sg.$thumbChildren
@@ -151,21 +167,43 @@
 		var oldNum = sg.current;
 		var $_target = sg.$mainChildren.eq(n),$_oldTarget = sg.$mainChildren.eq(oldNum);
 		var navDuration = noAnimation ? 0 : sg.o.nav.duration;
-
+		var targetAnimationComplete,oldTargetAnimationComplete;
 		if(sg.o.animation.type === 'fade'){
-			$_target
-				.stop(true,false)
-				.fadeTo(duration,1,function(){
-					if(!sg.o.other.disablePageChangeEndEvent){
-						sg.$target.trigger('pageChangeEnd',n);
-					}
-				});
-			if(oldNum !== null){
-				$_oldTarget
+			targetAnimationComplete = function(){
+				if(!sg.o.other.disablePageChangeEndEvent){
+					sg.$target.trigger('pageChangeEnd',n);
+				}
+			};
+			oldTargetAnimationComplete = function(){
+				if(!sg.o.other.disablePageChangeEndEvent){
+					$(this).css({display:'none'});
+				}
+			};
+			if(sg.canUseCss3Transition && !sg.o.other.disableCss3Transition){
+				$_target
 					.stop(true,false)
-					.fadeTo(duration,0,function(){
-						$(this).css({display:'none'});
-					});
+					.css({
+						display:'block'
+					})
+					.transition({
+						opacity:1
+					},duration,targetAnimationComplete);
+				if(oldNum !== null){
+					$_oldTarget
+						.stop(true,false)
+						.transition({
+							opacity:0
+						},duration,oldTargetAnimationComplete);
+				}
+			}else{
+				$_target
+					.stop(true,false)
+					.fadeTo(duration,1,targetAnimationComplete);
+				if(oldNum !== null){
+					$_oldTarget
+						.stop(true,false)
+						.fadeTo(duration,0,oldTargetAnimationComplete);
+				}
 			}
 		}else if(sg.o.animation.type === 'slide'){
 			var startPos = $_target.width() * ((oldNum < n) ? 1 : -1);
@@ -187,28 +225,47 @@
 					sg.$target.trigger('pageChangeEnd',n);
 				}
 			}else{
-				$_target
-				.css({
-					left:startPos,
-					display:'block'
-				})
-				.stop(true,false)
-				.animate({
-					left:0
-				},duration,sg.o.animation.easing);
-				$_oldTarget
-					.stop(true,false)
-					.animate({
-						left:endPos
-					},duration,sg.o.animation.easing,function(){
+				oldTargetAnimationComplete = function(){
+					$_oldTarget
+						.css({
+							display:'none'
+						});
+					if(!sg.o.other.disablePageChangeEndEvent){
+						sg.$target.trigger('pageChangeEnd',n);
+					}
+				};
+				if(sg.canUseCss3Transition && !sg.o.other.disableCss3Transition){
+					$_target
+						.css({
+							left:startPos,
+							display:'block'
+						})
+						.stop(true,false)
+						.transition({
+							left:0
+						},duration,sg.o.animation.easing);
 						$_oldTarget
-							.css({
-								display:'none'
-							});
-						if(!sg.o.other.disablePageChangeEndEvent){
-							sg.$target.trigger('pageChangeEnd',n);
-						}
-					});
+							.stop(true,false)
+							.transition({
+								left:endPos
+							},duration,sg.o.animation.easing,targetAnimationComplete);
+				}else{
+					$_target
+						.css({
+							left:startPos,
+							display:'block'
+						})
+						.stop(true,false)
+						.animate({
+							left:0
+						},duration,sg.o.animation.easing);
+						$_oldTarget
+							.stop(true,false)
+							.animate({
+								left:endPos
+							},duration,sg.o.animation.easing,targetAnimationComplete);
+				}
+				
 			}
 		}
 
