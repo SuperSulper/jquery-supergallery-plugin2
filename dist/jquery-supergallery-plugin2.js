@@ -1,4 +1,4 @@
-/*! jQuery Supergallery Plugin2 2013-08-08
+/*! jQuery Supergallery Plugin2 2013-08-13
  *  Vertion : 1.3.1
  *  Dependencies : jQuery 1.8.0 - 2.0.3
  *  Author : Otto Kamiya (MegazalRock)
@@ -63,7 +63,7 @@
 		this.length = this.num;
 		this.canUseCss3Transition = (function(){
 			var body = document.body || document.documentElement,bodyStyle = body.style;
-			return bodyStyle.WebkitBackgroundSize !== undefined || bodyStyle.MozBackgroundSize !== undefined || bodyStyle.OBackgroundSize !== undefined || bodyStyle.backgroundSize !== undefined;
+			return bodyStyle.WebkitTransition !== undefined || bodyStyle.MozTransition !== undefined || bodyStyle.OTransition !== undefined || bodyStyle.transition !== undefined;
 		})();
 		this.init();
 	};

@@ -50,7 +50,7 @@
 		this.length = this.num;
 		this.canUseCss3Transition = (function(){
 			var body = document.body || document.documentElement,bodyStyle = body.style;
-			return bodyStyle.WebkitBackgroundSize !== undefined || bodyStyle.MozBackgroundSize !== undefined || bodyStyle.OBackgroundSize !== undefined || bodyStyle.backgroundSize !== undefined;
+			return bodyStyle.WebkitTransition !== undefined || bodyStyle.MozTransition !== undefined || bodyStyle.OTransition !== undefined || bodyStyle.transition !== undefined;
 		})();
 		this.init();
 	};
