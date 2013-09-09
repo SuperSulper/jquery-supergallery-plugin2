@@ -52,11 +52,12 @@
 			var body = document.body || document.documentElement,bodyStyle = body.style;
 			return bodyStyle.WebkitTransition !== undefined || bodyStyle.MozTransition !== undefined || bodyStyle.OTransition !== undefined || bodyStyle.transition !== undefined;
 		})();
+		this.isAnimate = false;
 		this.init();
 	};
 
 	Supergallery.prototype.init = function(){
-		var sg = this,eventType = ('ontouchend' in window) ? 'touchend' : 'click';
+		var sg = this,clickEvent = ('ontouchend' in window) ? 'touchend' : 'click';
 
 		if(!sg.$main.length){
 			throw 'mainの数が0個です。セレクタが間違っているかもしれません。 this.o.selectors.main : ' + sg.o.selectors.main;
@@ -96,7 +97,8 @@
 			sg.$thumbChildren
 				.each(function(n){
 					$(this)
-						.on(eventType,function(){
+						.on(clickEvent,function(){
+							if(sg.isAnimate){ return false; }
 							sg.changeTo(n);
 						});
 				});
@@ -105,13 +107,15 @@
 			sg.$indicatorChildren
 				.each(function(n){
 					$(this)
-						.on(eventType,function(){
+						.on(clickEvent,function(){
+							if(sg.isAnimate){ return false; }
 							sg.changeTo(n);
 						});
 				});
 		}
 		if(sg.$nextBtn.length){
-			sg.$nextBtn.on(eventType,function(){
+			sg.$nextBtn.on(clickEvent,function(){
+				if(sg.isAnimate){ return false; }
 				var target = sg.current + 1;
 				if(target < sg.num){
 					sg.changeTo(target);
@@ -123,7 +127,8 @@
 			});
 		}
 		if(sg.$prevBtn.length){
-			sg.$prevBtn.on(eventType,function(){
+			sg.$prevBtn.on(clickEvent,function(){
+				if(sg.isAnimate){ return false; }
 				var target = sg.current - 1;
 				if(target >= 0){
 					sg.changeTo(target);
@@ -153,6 +158,7 @@
 	};
 	Supergallery.prototype.changeTo = function(n,noAnimation){
 		var sg = this;
+		sg.isAnimate = true;
 		if(n === 'next'){
 			n = (sg.current + 1 < sg.length) ? sg.current + 1 : (sg.o.other.loop) ? 0 : sg.current;
 		}else if(n === 'prev'){
@@ -170,6 +176,7 @@
 		var targetAnimationComplete,oldTargetAnimationComplete;
 		if(sg.o.animation.type === 'fade'){
 			targetAnimationComplete = function(){
+				sg.isAnimate = false;
 				if(!sg.o.other.disablePageChangeEndEvent){
 					sg.$target.trigger('pageChangeEnd',n);
 				}
@@ -221,20 +228,11 @@
 						});
 				}
 
+				sg.isAnimate = false;
 				if(!sg.o.other.disablePageChangeEndEvent){
 					sg.$target.trigger('pageChangeEnd',n);
 				}
 			}else{
-				oldTargetAnimationComplete = function(){
-					$_oldTarget
-						.css({
-							display:'none'
-						});
-					if(!sg.o.other.disablePageChangeEndEvent){
-						sg.$target.trigger('pageChangeEnd',n);
-					}
-
-				};
 				if(sg.canUseCss3Transition && !sg.o.other.disableCss3Transition){
 					$_target
 						.css({
@@ -362,14 +360,14 @@
 	};
 
 	Supergallery.prototype.destroy = function(removeStyles){
-		var sg = this,eventType = ('ontouchend' in window) ? 'touchend' : 'click';
+		var sg = this,clickEvent = ('ontouchend' in window) ? 'touchend' : 'click';
 		removeStyles = removeStyles || false;
 		sg.clearTimer();
 		sg.$nextBtn
 			.add(sg.$prevBtn)
 			.add(sg.$indicatorChildren)
 			.add(sg.$thumbChildren)
-			.off(eventType);
+			.off(clickEvent);
 
 		sg.$target
 			.off('mouseover')
