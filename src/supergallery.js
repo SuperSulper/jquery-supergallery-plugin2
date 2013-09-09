@@ -173,14 +173,14 @@
 		var oldNum = sg.current;
 		var $_target = sg.$mainChildren.eq(n),$_oldTarget = sg.$mainChildren.eq(oldNum);
 		var navDuration = noAnimation ? 0 : sg.o.nav.duration;
-		var targetAnimationComplete,oldTargetAnimationComplete;
+		var targetAnimationComplete = function(){
+			sg.isAnimate = false;
+			if(!sg.o.other.disablePageChangeEndEvent){
+				sg.$target.trigger('pageChangeEnd',n);
+			}
+		};
+		var oldTargetAnimationComplete;
 		if(sg.o.animation.type === 'fade'){
-			targetAnimationComplete = function(){
-				sg.isAnimate = false;
-				if(!sg.o.other.disablePageChangeEndEvent){
-					sg.$target.trigger('pageChangeEnd',n);
-				}
-			};
 			oldTargetAnimationComplete = function(){
 				if(!sg.o.other.disablePageChangeEndEvent){
 					$(this).css({display:'none'});
