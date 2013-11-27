@@ -1,4 +1,4 @@
-/*! jQuery Supergallery Plugin2 2013-09-09
+/*! jQuery Supergallery Plugin2 2013-11-27
  *  Vertion : 1.3.3
  *  Dependencies : jQuery 1.8.0 - 2.0.3
  *  Author : Otto Kamiya (MegazalRock)
@@ -177,7 +177,10 @@
 		}else if(n === 'prev'){
 			n = (sg.current - 1 >= 0) ? sg.current - 1 : (sg.o.other.loop) ? sg.length - 1 : sg.current;
 		}
-		if(n === sg.current){ return false;}
+		if(n === sg.current){ 
+			sg.isAnimate = false;
+			return false;
+		}
 
 		if(!sg.o.other.disablePageChangeStartEvent){
 			sg.$target.trigger('pageChangeStart',n);
@@ -256,11 +259,11 @@
 						.transition({
 							left:0
 						},duration,sg.o.animation.easing);
-						$_oldTarget
-							.stop(true,false)
-							.transition({
-								left:endPos
-							},duration,sg.o.animation.easing,targetAnimationComplete);
+					$_oldTarget
+						.stop(true,false)
+						.transition({
+							left:endPos
+						},duration,sg.o.animation.easing,targetAnimationComplete);
 				}else{
 					$_target
 						.css({
@@ -271,11 +274,11 @@
 						.animate({
 							left:0
 						},duration,sg.o.animation.easing);
-						$_oldTarget
-							.stop(true,false)
-							.animate({
-								left:endPos
-							},duration,sg.o.animation.easing,targetAnimationComplete);
+					$_oldTarget
+						.stop(true,false)
+						.animate({
+							left:endPos
+						},duration,sg.o.animation.easing,targetAnimationComplete);
 				}
 				
 			}
@@ -490,7 +493,8 @@
 		supergallery:function(_o){
 			$(this)
 				.each(function(){
-					new Supergallery(this,_o);
+					var sg = new Supergallery(this,_o);
+					$(this).data('supergallery',sg);
 				});
 			return this;
 		}
