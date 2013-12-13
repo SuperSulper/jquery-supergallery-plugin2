@@ -1,4 +1,4 @@
-/*! jQuery Supergallery Plugin2 2013-11-27
+/*! jQuery Supergallery Plugin2 2013-12-13
  *  Vertion : 1.3.4
  *  Dependencies : jQuery 1.8.0 - 2.0.3
  *  Author : Otto Kamiya (MegazalRock)
@@ -44,7 +44,8 @@
 				loop:true,						//最後の要素まで行ったら最初に戻るかどうか
 				disablePageChangeStartEvent:false,
 				disablePageChangeEndEvent:false,
-				disableCss3Transition:false
+				disableCss3Transition:false,
+				changePageEvent:'click'
 			}
 		};
 		$.extend(true,this.o,_o);
@@ -70,7 +71,9 @@
 	};
 
 	Supergallery.prototype.init = function(){
-		var sg = this,clickEvent = ('ontouchend' in window) ? 'touchend' : 'click';
+		var sg = this,
+			clickEvent = ('ontouchend' in window) ? 'touchend' : 'click',
+			thumbClickEvent = (clickEvent !== 'touchend') ?  sg.o.other.changePageEvent : clickEvent;
 
 		if(!sg.$main.length){
 			throw 'mainの数が0個です。セレクタが間違っているかもしれません。 this.o.selectors.main : ' + sg.o.selectors.main;
@@ -110,7 +113,7 @@
 			sg.$thumbChildren
 				.each(function(n){
 					$(this)
-						.on(clickEvent,function(){
+						.on(thumbClickEvent,function(){
 							if(sg.isAnimate){ return false; }
 							sg.changeTo(n);
 						});
