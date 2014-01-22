@@ -439,6 +439,13 @@
 			};
 			$.extend(true,o,_o);
 			$.extend(true,o.main.timer,o.timer);
+
+			o.main.selectors.thumb = '';
+			o.thumb.selectors.thumb = '';
+			o.thumb.selectors.nextBtn = '';
+			o.thumb.selectors.prevBtn = '';
+			o.thumb.selectors.indicator = '';
+
 			var mainSelector = [targetSelector,o.selectors.main].join(' ');
 			var thumbPagesSlector = [targetSelector,o.selectors.thumbPages].join(' ');
 			var main = $.supergallery(mainSelector,o.main);

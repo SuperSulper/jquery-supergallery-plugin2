@@ -1,8 +1,8 @@
-/*! jQuery Supergallery Plugin2 2013-12-13
+/*! jQuery Supergallery Plugin2 2014-01-22
  *  Vertion : 1.4.0
  *  Dependencies : jQuery 1.8.0 - 2.0.3
  *  Author : Otto Kamiya (MegazalRock)
- *  Copyright (c) 2013 Otto Kamiya (MegazalRock);
+ *  Copyright (c) 2014 Otto Kamiya (MegazalRock);
  *  License : MIT https://github.com/megazalrock/jquery-supergallery-plugin2/blob/master/LICENSE-MIT
  *  ----
  *  jQuery Transit - CSS3 transitions and transformations, 
@@ -452,6 +452,13 @@
 			};
 			$.extend(true,o,_o);
 			$.extend(true,o.main.timer,o.timer);
+
+			o.main.selectors.thumb = '';
+			o.thumb.selectors.thumb = '';
+			o.thumb.selectors.nextBtn = '';
+			o.thumb.selectors.prevBtn = '';
+			o.thumb.selectors.indicator = '';
+
 			var mainSelector = [targetSelector,o.selectors.main].join(' ');
 			var thumbPagesSlector = [targetSelector,o.selectors.thumbPages].join(' ');
 			var main = $.supergallery(mainSelector,o.main);
