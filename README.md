@@ -1,5 +1,5 @@
 # jQuery Supergallery Plugin2
-Version 1.2.6
+Version 1.4.0
 
 Otto Kamiya (MegazalRock)  
 mail : otto@mgzl.jp  
@@ -7,6 +7,11 @@ twitter : @megazal_rock
 facebook : facebook.com/megazalrock
 
 ## 更新履歴
+* 1.4.0 クリック以外のイベントも利用できるように変更
+* 1.3.4 bugfix
+* 1.3.0 css3transitionを利用可能であれば利用するように変更
+* 1.2.8 changeToにnextとprevを指定可能に
+* 1.2.7 changePageイベントを発生させないオプションの追加
 * 1.2.5 .destroy()の実装・README.mdの更新
 * 1.2.4 Fixes #4 #5 #9
 * 1.2.3 メイン画像にもselectedクラスを付与するように変更
@@ -108,32 +113,36 @@ minがついているファイルはminify済みのファイルです。通常�
 	$(function(){
 		$('#gallery').supergallery({
 			selectors:{
-				main:'.main',					//メイン画像が入っている要素のセレクタ
-				thumb:'.thumb',					//サムネイルが入っている要素のセレクタ	
-				nextBtn:'.nextBtn',				//「次へ」ボタン用のセレクタ
-				prevBtn:'.prevBtn',				//「前へ」ボタン用のセレクタ
-				indicator:'.indicator'			//ページインジケーター用のセレクタ
+				main:'.main',							//メイン画像が入っている要素のセレクタ
+				thumb:'.thumb',							//サムネイルが入っている要素のセレクタ	
+				nextBtn:'.nextBtn',						//「次へ」ボタン用のセレクタ
+				prevBtn:'.prevBtn',						//「前へ」ボタン用のセレクタ
+				indicator:'.indicator'					//ページインジケーター用のセレクタ
 			},
 			animation:{
-				type:'fade',					//画像の切替アニメーションの種類 (fade:クロスフェード slide:スライド)
-				duration:400,					//画像の切替アニメーションのかかる時間
-				easing:'swing'					//画像の切替のイージング（プラグイン等で拡張したものも扱えます。）
+				type:'fade',							//画像の切替アニメーションの種類 (fade:クロスフェード slide:スライド)
+				duration:400,							//画像の切替アニメーションのかかる時間
+				easing:'swing'							//画像の切替のイージング（プラグイン等で拡張したものも扱えます。）
 			},
 			timer:{
-				enable:true,					//自動めくり機能を有効にする
-				interval:3000,					//自動めくりの間隔
-				stopOnHover:true				//マウスオーバー時にタイマーを止める
+				enable:true,							//自動めくり機能を有効にする
+				interval:3000,							//自動めくりの間隔
+				stopOnHover:true						//マウスオーバー時にタイマーを止める
 			},
 			nav:{
-				autoHideNaviBtn:true,			//最初・最後のページでprev・nextボタンを非表示にするかどうか
-				duration:400,					//非表示にするアニメーションのかかる時間
-				easing:'swing',					//非表示にするアニメーションのイージング	
-				hiddenClassName:'hidden'		//非表示にした際に付加するクラス名
+				autoHideNaviBtn:true,					//最初・最後のページでprev・nextボタンを非表示にするかどうか
+				duration:400,							//非表示にするアニメーションのかかる時間
+				easing:'swing',							//非表示にするアニメーションのイージング	
+				hiddenClassName:'hidden'				//非表示にした際に付加するクラス名
 			},
 			other:{
-				initialSelect:0,				//一番はじめに選択しておく要素のインデックス
-				selectedClassName:'selected',	//選択時につけておくサムネイル・ページインジケーター用のクラス
-				loop:true						//最後の要素まで行ったら最初に戻るかどうか
+				initialSelect:0,						//一番はじめに選択しておく要素のインデックス
+				selectedClassName:'selected',			//選択時につけておくサムネイル・ページインジケーター用のクラス
+				loop:true								//最後の要素まで行ったら最初に戻るかどうか
+				disablePageChangeStartEvent:false,		//pageChangeStartEventを発生させない
+				disablePageChangeEndEvent:false,		//disablePageChangeEndEventを発生させない
+				disableCss3Transition:false,			//利用可能な場合でもcss3Transitionを利用しない
+				changePageEvent:'click'					//pageChangeを発生させるイベント（'click'ならクリック 'mouseenter'でホバー）
 			}
 		});
 	});
@@ -206,54 +215,57 @@ minがついているファイルはminify済みのファイルです。通常�
 		var gallery2 = $.superThumbGallery('#gallery2');
 	});
 
-デフォルトの設定を変更する場合は、第二引数にオブジェクト形式で渡します。下記はデフォルトで設定されているものと同じです。  
-基本的にデフォルトの設定はサムネイルのページ切り替え機能なしのものと同じですが、違う部分にのみコメントで説明を入れてあります。  
-また記述されていないものについては値を渡す必要はありません。	
+デフォルトの設定を変更する場合は、第二引数にオブジェクト形式で渡します。  
+mainとthumbのそれぞれの設定については、timer以外は上記のsupergalleryと同じオプションを指定可能です。  
 
 	$(function(){
 		$.superThumbGallery('#gallery2',{
 			selectors:{
-				main:'.mainHolder', 		//メイン画像のラッパーのセレクタ
-				thumbPages:'.thumbHolder',	//サムネイルのラッパーのセレクタ
-				thumbBtns:'.thumbBtn'		//クリックの対象となるセレクタ
+				main:'.mainHolder',// メイン画像全体のセレクタ
+				thumbPages:'.thumbHolder', // サムネイルのページ全体のセレクタ
+				thumbBtns:'.thumbBtn' // サムネイル自体のセレクタ
 			},
-			main:{							//メイン画像についての設定
+			thumbNum:5, //サムネイルの1ページあたりの個数
+			timer:{ //タイマー関係の設定
+				enable:true,					//自動めくり機能を有効にする
+				interval:3000,					//自動めくりの間隔
+				stopOnHover:true				//マウスオーバー時にタイマーを止める
+			},
+			main:{
 				selectors:{
-					main:'.main',
-					nextBtn:'.nextBtn',
-					prevBtn:'.prevBtn',
-					indicator:'.indicator'
+					main:'.main',							//メイン画像が入っている要素のセレクタ
+					nextBtn:'.nextBtn',						//「次へ」ボタン用のセレクタ
+					prevBtn:'.prevBtn',						//「前へ」ボタン用のセレクタ
+					indicator:'.indicator'					//ページインジケーター用のセレクタ
 				},
 				animation:{
-					type:'fade',
-					duration:400,
-					easing:'swing'
+					type:'fade',							//画像の切替アニメーションの種類 (fade:クロスフェード slide:スライド)
+					duration:400,							//画像の切替アニメーションのかかる時間
+					easing:'swing'							//画像の切替のイージング（プラグイン等で拡張したものも扱えます。）
 				},
-				timer:{
-					enable:true,
-					interval:3000,
-					stopOnHover:true
+				nav:{
+					autoHideNaviBtn:true,					//最初・最後のページでprev・nextボタンを非表示にするかどうか
+					duration:400,							//非表示にするアニメーションのかかる時間
+					easing:'swing',							//非表示にするアニメーションのイージング	
+					hiddenClassName:'hidden'				//非表示にした際に付加するクラス名
 				},
 				other:{
-					initialSelect:0,
-					selectedClassName:'selected',
-					loop:true
+					initialSelect:0,						//一番はじめに選択しておく要素のインデックス
+					selectedClassName:'selected',			//選択時につけておくサムネイル・ページインジケーター用のクラス
+					loop:true								//最後の要素まで行ったら最初に戻るかどうか
+					disableCss3Transition:false,			//利用可能な場合でもcss3Transitionを利用しない
 				}
 			},
-			thumb:{							//サムネイルについての設定	
+			thumb:{
 				selectors:{
-					main:'.thumbPages'			//サムネイルのページ用のセレクタ
+					main:'.thumbPages',							//サムネイル画像のページが入っている要素のセレクタ
 				},
 				animation:{
-					type:'slide',				//ページ切替アニメーションの種類
-					duration:400,
-					easing:'swing'
-				},
-				other:{
-					selectedClassName:'selected'
+					type:'slide',							//画像の切替アニメーションの種類 (fade:クロスフェード slide:スライド)
+					duration:400,							//画像の切替アニメーションのかかる時間
+					easing:'swing'							//画像の切替のイージング（プラグイン等で拡張したものも扱えます。）
 				}
 			}
-		});
 	});
 
 ### <a name="sub"></a>その他の使用方法
@@ -272,7 +284,6 @@ minがついているファイルはminify済みのファイルです。通常�
 
 #### <a name="sub_2"></a>イベント
 対象の要素にて、`pageChangeStart` `pageChangeEnd`イベントが発生します。`pageChangeStart`はアニメーション開始時に、`pageChangeEnd`はアニメーション終了時に発生します。	
-
 	$('#gallery')
 		.supergallery()
 		.on('pageChangeStart',function(e,pageNum){
@@ -283,91 +294,6 @@ minがついているファイルはminify済みのファイルです。通常�
 			//e : jQueryイベントオブジェクト
 			//pageNum : ページ番号
 		})
-
-#### <a name="sub_3"></a>ページ切り替え付きサムネイルのヘルパー関数
-このプラグインをうまく使うことによって、ページ切り替えのついたサムネイルにすることも可能ですが、面倒なのでヘルパー関数を追加しました。
-
-HTMLの記述例
-
-	<div id="gallery2" class="gallery">
-		<div class="mainHolder">
-			<ul class="main">
-				<li><img src="http://lorempixel.com/g/300/300/city/1/" alt=""></li>
-				<li><img src="http://lorempixel.com/g/300/300/city/2/" alt=""></li>
-				<li><img src="http://lorempixel.com/g/300/300/city/3/" alt=""></li>
-				<li><img src="http://lorempixel.com/g/300/300/city/4/" alt=""></li>
-				<li><img src="http://lorempixel.com/g/300/300/city/5/" alt=""></li>
-				<li><img src="http://lorempixel.com/g/300/300/city/6/" alt=""></li>
-				<li><img src="http://lorempixel.com/g/300/300/city/7/" alt=""></li>
-				<li><img src="http://lorempixel.com/g/300/300/city/8/" alt=""></li>
-				<li><img src="http://lorempixel.com/g/300/300/city/9/" alt=""></li>
-				<li><img src="http://lorempixel.com/g/300/300/city/10/" alt=""></li>
-			</ul>
-			<nav>
-				<div class="prevBtn">PREV</div>
-				<div class="nextBtn">NEXT</div>
-			</nav>
-		</div>
-		<div class="thumbHolder">
-			<ul class="thumbPages">
-				<li>
-					<ul class="thumb">
-						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/1/" alt=""></li>
-						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/2/" alt=""></li>
-						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/3/" alt=""></li>
-						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/4/" alt=""></li>
-						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/5/" alt=""></li>
-					</ul>
-				</li>
-				<li>
-					<ul class="thumb">
-						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/6/" alt=""></li>
-						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/7/" alt=""></li>
-						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/8/" alt=""></li>
-						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/9/" alt=""></li>
-						<li class="thumbBtn"><img src="http://lorempixel.com/g/100/100/city/10/" alt=""></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-	</div>
-
-JavaScriptの記述例
-
-	$.superThumbGallery('#gallery2');
-
-オプションの形式とデフォルトは下記のとおりです。
-
-	{
-		selectors:{
-			main:'.mainHolder',// メイン画像全体のセレクタ
-			thumbPages:'.thumbHolder', // サムネイルのページ全体のセレクタ
-			thumbBtns:'.thumbBtn' // サムネイル自体のセレクタ
-		},
-		thumbNum:5, //サムネイルの1ページあたりの個数
-		main:{
-			selectors:{
-				thumb:'' //必ず空にします。
-			},
-			timer:{
-				enable:true
-			}
-		},
-		thumb:{
-			selectors:{
-				main:'.thumbPages', //サムネイルのページ用のセレクタ
-				thumb:'', //必ず空にします。
-				nextBtn:'', //必ず空にします。
-				prevBtn:'' //必ず空にします。
-			},
-			animation:{
-				type:'slide'
-			},
-			timer:{
-				enable:false //必ずfalseにします。
-			}
-		}
-	};
 
 
 ## ライセンス
