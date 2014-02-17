@@ -46,6 +46,7 @@
 		this.$nextBtn = this.$target.find(this.o.selectors.nextBtn);
 		this.$prevBtn = this.$target.find(this.o.selectors.prevBtn);
 		this.current = null;
+		this.target = null;
 		this.timerId = null;
 		this.num = this.$mainChildren.length;
 		this.length = this.num;
@@ -171,6 +172,7 @@
 			sg.isAnimate = false;
 			return false;
 		}
+		sg.target = n;
 
 		if(!sg.o.other.disablePageChangeStartEvent){
 			sg.$target.trigger('pageChangeStart',n);

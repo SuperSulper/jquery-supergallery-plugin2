@@ -1,4 +1,4 @@
-/*! jQuery Supergallery Plugin2 2014-01-22
+/*! jQuery Supergallery Plugin2 2014-02-17
  *  Vertion : 1.4.1
  *  Dependencies : jQuery 1.8.0 - 2.0.3
  *  Author : Otto Kamiya (MegazalRock)
@@ -59,6 +59,7 @@
 		this.$nextBtn = this.$target.find(this.o.selectors.nextBtn);
 		this.$prevBtn = this.$target.find(this.o.selectors.prevBtn);
 		this.current = null;
+		this.target = null;
 		this.timerId = null;
 		this.num = this.$mainChildren.length;
 		this.length = this.num;
@@ -184,6 +185,7 @@
 			sg.isAnimate = false;
 			return false;
 		}
+		sg.target = n;
 
 		if(!sg.o.other.disablePageChangeStartEvent){
 			sg.$target.trigger('pageChangeStart',n);
