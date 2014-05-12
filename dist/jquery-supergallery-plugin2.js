@@ -310,21 +310,19 @@
 			.not(':eq(' + n + ')')
 				.removeClass(sg.o.other.selectedClassName);
 
-		if(!sg.o.other.loop){
-			if(n <= 0){
-				sg.$prevBtn
-					.addClass(sg.o.nav.hiddenClassName);
-			}else{
-				sg.$prevBtn
-					.removeClass(sg.o.nav.hiddenClassName);
-			}
-			if(n >= sg.length - 1){
-				sg.$nextBtn
-					.addClass(sg.o.nav.hiddenClassName);
-			}else{
-				sg.$nextBtn
-					.removeClass(sg.o.nav.hiddenClassName);
-			}
+		if(n <= 0){
+			sg.$prevBtn
+				.addClass(sg.o.nav.hiddenClassName);
+		}else{
+			sg.$prevBtn
+				.removeClass(sg.o.nav.hiddenClassName);
+		}
+		if(n >= sg.length - 1){
+			sg.$nextBtn
+				.addClass(sg.o.nav.hiddenClassName);
+		}else{
+			sg.$nextBtn
+				.removeClass(sg.o.nav.hiddenClassName);
 		}
 
 		if(sg.o.nav.autoHideNaviBtn && !sg.o.other.loop){
