@@ -7,6 +7,8 @@ twitter : @megazal_rock
 facebook : facebook.com/megazalrock
 
 ## 更新履歴
+* 1.4.3 changeToNext(), changeToPrev()関数を追加  
+nextBtnとprevBtnのhiddenClass付与はloopを無視するように変更
 * 1.4.0 クリック以外のイベントも利用できるように変更
 * 1.3.4 bugfix
 * 1.3.0 css3transitionを利用可能であれば利用するように変更
@@ -17,7 +19,7 @@ facebook : facebook.com/megazalrock
 * 1.2.3 メイン画像にもselectedクラスを付与するように変更
 * 1.2.0 ページインジケーター機能追加・Readme更新
 * 1.1.1 bugfix
-* 1.1.0 ページ切り替え付きサムネイルのためのヘルパーを追加	
+* 1.1.0 ページ切り替え付きサムネイルのためのヘルパーを追加
 * 1.0.0	InitialRelease
 
 ## 概要
@@ -27,11 +29,10 @@ Web製作者向けのギャラリープラグインです。
 ## 必要なライブラリ
 [jQuery 1.8+](http://jquery.com/)
 ## 動作環境
-Internet Explorer 7-10(Win)  
-Chrome23+(Win/Mac)  
-Firefox16+(Win/Mac)  
-Opera12+(Win/Mac)  
-Safari6+(Mac)
+Internet Explorer 8-10(Win)  
+Chrome最新版
+Firefox最新版
+Safari最新版
 
 
 ## 使用するファイル
@@ -108,13 +109,13 @@ minがついているファイルはminify済みのファイルです。通常�
 		$('#gallery').supergallery();
 	});
 
-デフォルトの設定を変更する場合は、引数にオブジェクト形式で渡します。下記で設定されているものはデフォルトで設定されているものと同じです。	
+デフォルトの設定を変更する場合は、引数にオブジェクト形式で渡します。下記で設定されているものはデフォルトで設定されているものと同じです。
 
 	$(function(){
 		$('#gallery').supergallery({
 			selectors:{
 				main:'.main',							//メイン画像が入っている要素のセレクタ
-				thumb:'.thumb',							//サムネイルが入っている要素のセレクタ	
+				thumb:'.thumb',							//サムネイルが入っている要素のセレクタ
 				nextBtn:'.nextBtn',						//「次へ」ボタン用のセレクタ
 				prevBtn:'.prevBtn',						//「前へ」ボタン用のセレクタ
 				indicator:'.indicator'					//ページインジケーター用のセレクタ
@@ -132,7 +133,7 @@ minがついているファイルはminify済みのファイルです。通常�
 			nav:{
 				autoHideNaviBtn:true,					//最初・最後のページでprev・nextボタンを非表示にするかどうか
 				duration:400,							//非表示にするアニメーションのかかる時間
-				easing:'swing',							//非表示にするアニメーションのイージング	
+				easing:'swing',							//非表示にするアニメーションのイージング
 				hiddenClassName:'hidden'				//非表示にした際に付加するクラス名
 			},
 			other:{
@@ -147,7 +148,7 @@ minがついているファイルはminify済みのファイルです。通常�
 		});
 	});
 
-#### <a name="main_2"></a>サムネイルのページ切り替え機能**あり**の場合	
+#### <a name="main_2"></a>サムネイルのページ切り替え機能**あり**の場合
 
 ##### HTMLの記述例
 
@@ -246,7 +247,7 @@ mainとthumbのそれぞれの設定については、timer以外は上記のsup
 				nav:{
 					autoHideNaviBtn:true,					//最初・最後のページでprev・nextボタンを非表示にするかどうか
 					duration:400,							//非表示にするアニメーションのかかる時間
-					easing:'swing',							//非表示にするアニメーションのイージング	
+					easing:'swing',							//非表示にするアニメーションのイージング
 					hiddenClassName:'hidden'				//非表示にした際に付加するクラス名
 				},
 				other:{
@@ -270,20 +271,44 @@ mainとthumbのそれぞれの設定については、timer以外は上記のsup
 
 ### <a name="sub"></a>その他の使用方法
 
-#### <a name="sub_1"></a>外部からの操作
+#### <a name="sub_1"></a>外部からの操作（APIからの操作）
 外部からギャラリーを操作することも可能です。その場合は、jQueryのメソッドチェーンではなく、`$.supergallery()`を利用して下さい。  
 第一引数に対象となる要素のセレクタ、第二引数にオプションを渡して下さい。
 
 	var gallery = $.supergallery('#gallery',{
 		//オプションの指定
 	});
+
+##### gallery.changeTo(pageNum);
+pageNumにページ番号を渡すと該当ページにページを切り替えます
+
 	gallery.changeTo(3);	//3ページ目へ変更
-	gallery.setTimer();		//現在の自動めくり用タイマーを破棄して、新たにタイマーを設定します。
-	gallery.clearTimer();	//現在の自動めくり用タイマーを破棄します。
-	gallery.destroy(true);	//各種イベントを破棄し初期化前の状態に戻します。引数にtrueを渡すと、styles属性も消去します。
+
+##### gallery.changeToNext();
+次のページへに切り替えます。
+
+	var result = gallery.changeToNext();
+	// 次のページがある場合 result は true
+	// 次のページがない場合 result は false
+
+##### gallery.changeToPrev();
+前のページへに切り替えます。
+
+	var result = gallery.changeToPrev();
+	// 前のページがある場合 result は true
+	// 前のページがない場合 result は false
+
+##### gallery.setTimer();
+現在の自動めくり用タイマーを破棄して、新たにタイマーを設定します。
+
+##### gallery.clearTimer();
+現在の自動めくり用タイマーを破棄します。
+
+##### gallery.destroy(removeStyle);
+各種イベントを破棄し初期化前の状態に戻します。引数にtrueを渡すと、styles属性も消去します。
 
 #### <a name="sub_2"></a>イベント
-対象の要素にて、`pageChangeStart` `pageChangeEnd`イベントが発生します。`pageChangeStart`はアニメーション開始時に、`pageChangeEnd`はアニメーション終了時に発生します。	
+対象の要素にて、`pageChangeStart` `pageChangeEnd`イベントが発生します。`pageChangeStart`はアニメーション開始時に、`pageChangeEnd`はアニメーション終了時に発生します。
 	$('#gallery')
 		.supergallery()
 		.on('pageChangeStart',function(e,pageNum){
@@ -298,7 +323,7 @@ mainとthumbのそれぞれの設定については、timer以外は上記のsup
 
 ## ライセンス
 The MIT License
-(C) Otto Kamiya (MegazalRock) 
+(C) Otto Kamiya (MegazalRock)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

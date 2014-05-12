@@ -1,5 +1,5 @@
 /*! jQuery Supergallery Plugin2 2014-05-12
- *  Vertion : 1.4.2
+ *  Vertion : 1.4.3
  *  Dependencies : jQuery 1.8.0 - 2.0.3
  *  Author : Otto Kamiya (MegazalRock)
  *  Copyright (c) 2014 Otto Kamiya (MegazalRock);
