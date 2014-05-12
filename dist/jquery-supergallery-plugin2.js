@@ -1,4 +1,4 @@
-/*! jQuery Supergallery Plugin2 2014-02-17
+/*! jQuery Supergallery Plugin2 2014-05-12
  *  Vertion : 1.4.2
  *  Dependencies : jQuery 1.8.0 - 2.0.3
  *  Author : Otto Kamiya (MegazalRock)
@@ -17,7 +17,7 @@
 		this.o = {
 			selectors:{
 				main:'.main',					//メイン画像が入っている要素のセレクタ
-				thumb:'.thumb',					//サムネイルが入っている要素のセレクタ	
+				thumb:'.thumb',					//サムネイルが入っている要素のセレクタ
 				nextBtn:'.nextBtn',				//「次へ」ボタン用のセレクタ
 				prevBtn:'.prevBtn',				//「前へ」ボタン用のセレクタ
 				indicator:'.indicator'			//ページインジケーター用のセレクタ
@@ -108,7 +108,7 @@
 				sg.o.animation.easing = 'in-out';
 			}
 		}
-		
+
 
 		if(sg.$thumbChildren.length){
 			sg.$thumbChildren
@@ -181,7 +181,7 @@
 		}else if(n === 'prev'){
 			n = (sg.current - 1 >= 0) ? sg.current - 1 : (sg.o.other.loop) ? sg.length - 1 : sg.current;
 		}
-		if(n === sg.current){ 
+		if(n === sg.current){
 			sg.isAnimate = false;
 			return false;
 		}
@@ -285,7 +285,7 @@
 							left:endPos
 						},duration,sg.o.animation.easing,targetAnimationComplete);
 				}
-				
+
 			}
 		}
 
@@ -310,15 +310,15 @@
 			.not(':eq(' + n + ')')
 				.removeClass(sg.o.other.selectedClassName);
 
-		if(!sg.o.other.loop){	
+		if(!sg.o.other.loop){
 			if(n <= 0){
 				sg.$prevBtn
 					.addClass(sg.o.nav.hiddenClassName);
-			}else{	
+			}else{
 				sg.$prevBtn
 					.removeClass(sg.o.nav.hiddenClassName);
 			}
-			if(n >= sg.length - 1){	
+			if(n >= sg.length - 1){
 				sg.$nextBtn
 					.addClass(sg.o.nav.hiddenClassName);
 			}else{
@@ -407,6 +407,26 @@
 				.add(sg.$prevBtn)
 				.add(sg.$nextBtn)
 				.removeAttr('style');
+		}
+	};
+
+	Supergallery.prototype.changeToNext = function(){
+		var sg = this;
+		if(sg.current + 1 < sg.length){
+			sg.changeTo(sg.current + 1);
+			return true;
+		}else{
+			return false;
+		}
+	};
+
+	Supergallery.prototype.changeToPrev = function(){
+		var sg = this;
+		if(sg.current - 1 >= 0){
+			sg.changeTo(sg.current - 1);
+			return true;
+		}else{
+			return false;
 		}
 	};
 
@@ -514,6 +534,7 @@
 	$.extend(core);
 	$.fn.extend(fn);
 })(jQuery);
+
 /*!
  * jQuery Transit - CSS3 transitions and transformations
  * (c) 2011-2012 Rico Sta. Cruz <rico@ricostacruz.com>
